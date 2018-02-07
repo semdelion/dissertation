@@ -1,0 +1,250 @@
+_NAME <Опросник №3 (PCRS). Личностная готовность к переменам>
+_DESCRIPTION <Оцените, насколько эти утверждения верны по отношению к вам. 
+Варианты ответов: 1- совершенно не согласен, 2, 3, 4, 5, 6 - полностью согласен
+Если вы полностью согласны с утверждением, в Бланке для ответов выберите цифру 6. Если согласны, но немного меньше – цифру 5 или 4 и т.д. Чем меньше цифра, тем меньше, на ваш взгляд, данное утверждение описывает ваше обычное поведение и ваши взгляды. Если совершенно не согласны с утверждением, выбирайте цифру 1.>
+_QUESTION <Я предпочитаю привычное неизвестному>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я редко «отмеряю семь раз»>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я не из тех, кто меняет свои планы>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Не с нетерпением дожидаюсь начала дня, когда смогу взяться за дело>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я считаю, что никому не стоит давать слишком много надежд>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Если что-то не работает, я найду способ устранить неполадку>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Меня раздражает отсутствие ясных и четких ответов>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Мне больше нравится создавать привычное положение дел и придерживаться его>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я могу сделать так, что любая ситуация будет работать на меня>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Мне нужно некоторое время, чтобы свыкнуться с тем, что что-то не получается>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Мне трудно расслабиться и ничего не делать>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Если есть вероятность, что что-то может не получиться, то оно и не получится>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Когда я завяз («встрял»), я предпочитаю импровизировать на ходу, чтобы найти выход из ситуации>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я теряюсь, когда не улавливаю сути происходящего>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я предпочитаю знакомую область деятельности, в которой чувствую себя комфортно>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я справлюсь со всем, с чем приходится сталкиваться>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Если я что-то твердо решил, поменять это решение мне будет сложно>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я предпочитаю выкладываться до конца>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я обычно сосредоточиваюсь на том, что может не получиться>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Когда люди пытаются найти выход из сложной ситуации, они приходят ко мне>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Если исход дела неясен, я стремлюсь прояснить все немедленно>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Думаю, что стоит придерживаться испытанного и надежного>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я сосредоточиваюсь на моих достоинствах, а не на недостатках>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Мне тяжело сдаться, даже если что-то совсем не получается>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я неутомим и полон энергии>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Редко все получается так, как мне хотелось бы>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Сильная сторона моей личности - умение преодолевать трудности>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Терпеть не могу оставлять дело незавершенным>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я предпочитаю идти по главной, а не по второстепенной дороге>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Моя вера в собственные силы непоколебима>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Со своим уставом в чужой монастырь не ходи!>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я страстный и решительный>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я чаще вижу проблемы, а не возможности их решения>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я обращаюсь к необычным, нестандартным источникам для решения своих проблем>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Я действую не очень продуктивно, если цели действий и ожидания неопределенны>
+	_ANSWER <6>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_RESULT <>

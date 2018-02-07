@@ -1,0 +1,125 @@
+_NAME <Насколько Вы готовы к избеганию неудач>
+_QUESTION <>
+	_ANSWER <смелый>
+	_ANSWER <бдительный>
+	_ANSWER <предприимчивый>
+_QUESTION <>
+	_ANSWER <кроткий>
+	_ANSWER <робкий>
+	_ANSWER <упрямый>
+_QUESTION <>
+	_ANSWER <осторожный>
+	_ANSWER <решительный>
+	_ANSWER <пессимистичный>
+_QUESTION <>
+	_ANSWER <непостоянный>
+	_ANSWER <бесцеремонный>
+	_ANSWER <внимательный>
+
+_QUESTION <>
+	_ANSWER <неумный>
+	_ANSWER <трусливый>
+	_ANSWER <не думающий>
+_QUESTION <>
+	_ANSWER <ловкий>
+	_ANSWER <бойкий>
+	_ANSWER <предусмотрительный>
+_QUESTION <>
+	_ANSWER <хладнокровный>
+	_ANSWER <колеблющийся>
+	_ANSWER <удалой>
+_QUESTION <>
+	_ANSWER <стремительный>
+	_ANSWER <легкомысленный>
+	_ANSWER <боязливый>
+_QUESTION <>
+	_ANSWER <не задумывающийся>
+	_ANSWER <жеманный>
+	_ANSWER <непредусмотрительный>
+_QUESTION <>
+	_ANSWER <оптимистичный>
+	_ANSWER <добросовестный>
+	_ANSWER <чуткий>
+_QUESTION <>
+	_ANSWER <меланхоличный>
+	_ANSWER <сомневающийся>
+	_ANSWER <неустойчивый>
+_QUESTION <>
+	_ANSWER <трусливый>
+	_ANSWER <небрежный>
+	_ANSWER <взволнованный>
+_QUESTION <>
+	_ANSWER <опрометчивый>
+	_ANSWER <тихий>
+	_ANSWER <боязливый>
+_QUESTION <>
+	_ANSWER <внимательный>
+	_ANSWER <неблагоразумный>
+	_ANSWER <смелый>
+_QUESTION <>
+	_ANSWER <рассудительный>
+	_ANSWER <быстрый>
+	_ANSWER <мужественный>
+_QUESTION <>
+	_ANSWER <предприимчивый>
+	_ANSWER <остроумный>
+	_ANSWER <предусмотрительный>
+_QUESTION <>
+	_ANSWER <взволнованный>
+	_ANSWER <рассеянный>
+	_ANSWER <робкий>
+_QUESTION <>
+	_ANSWER <малодушный>
+	_ANSWER <неосторожный>
+	_ANSWER <бесцеремонный>
+_QUESTION <>
+	_ANSWER <пугливый>
+	_ANSWER <нерешительный>
+	_ANSWER <нервный>
+
+_QUESTION <>
+	_ANSWER <исполнительный>
+	_ANSWER <преданный>
+	_ANSWER <авантюрный>
+_QUESTION <>
+	_ANSWER <предусмотрительный>
+	_ANSWER <бойкий>
+	_ANSWER <отчаянный>
+_QUESTION <>
+	_ANSWER <укрощенный>
+	_ANSWER <безразличный>
+	_ANSWER <небрежный>
+_QUESTION <>
+	_ANSWER <осторожный>
+	_ANSWER <беззаботный>
+	_ANSWER <терпеливый>
+_QUESTION <>
+	_ANSWER <разумный>
+	_ANSWER <заботливый>
+	_ANSWER <храбрый>
+_QUESTION <>
+	_ANSWER <предвидящий>
+	_ANSWER <неустрашимый>
+	_ANSWER <добросовестный>
+_QUESTION <>
+	_ANSWER <поспешный>
+	_ANSWER <пугливый>
+	_ANSWER <беззаботный>
+
+_QUESTION <>
+	_ANSWER <рассеянный>
+	_ANSWER <опрометчивый>
+	_ANSWER <пессимистичный>
+_QUESTION <>
+	_ANSWER <осмотрительный>
+	_ANSWER <рассудительный>
+	_ANSWER <предприимчивый>
+_QUESTION <>
+	_ANSWER <тихий>
+	_ANSWER <неорганизованный>
+	_ANSWER <боязливый>
+_QUESTION <>
+	_ANSWER <оптимистичный>
+	_ANSWER <бдительный>
+	_ANSWER <беззаботный>
+_RESULT <>

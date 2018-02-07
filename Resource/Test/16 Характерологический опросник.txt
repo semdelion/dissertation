@@ -1,0 +1,206 @@
+_NAME <Характерологический опросник (автор Э.И.Мещерякова)>
+_DESCRIPTION <Если свойство характера выражено: 
+значительно, рядом с номером вопроса поставьте 5 баллов, 
+наверняка выражено – 4 балла, 
+выражено, и не выражено – 3 балла, 
+выражено слабо – 2 балла, 
+не выражено – 1 балл.>
+_QUESTION <Любите ли Вы фантазировать (сочинять сцены) и разыгрывать роли своих воображаемых героев?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Любите ли Вы быть в центре внимания окружающих?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Любите ли Вы заводить новые знакомства?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Часто Вам надоедала школа?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Для Вас характерны затяжные периоды плохого настроения?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <У Вас бывает с утра упадок сил, и все валится из рук?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Зависят ли от Вашего настроения сон, аппетит, самочувствие, трудоспособность?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы часто болели в детстве?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Легко ли Вы переходите от слез к смеху?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Поражаются ли друзья Вашей работоспособности и неутомимости?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Не говорили ли Вам, что Вы «разбрасываетесь»?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Бывает ли, что Вы много говорите и Вам трудно остановиться?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <В детстве Вы были боязливы и пугливы?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы склонны видеть у себя много недостатков?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы ранимы?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Бывает, что Вы раздражаетесь при общении с людьми?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Часто ли Вы чувствуете утомление от дел и общую слабость?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Часто ли Вы испытываете усталость?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Бывало, что Вы совершали поступки, о которых позже приходилось жалеть?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Можете ли Вы «выйти из себя» и даже дать волю рукам, если кто-то умышленно Вас грубо рассердит?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы достигли бы в жизни большего, если бы люди не были настроены против Вас и правильно понимали Ваши поступки?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Бывает, что Вы не можете выбрать одно из нескольких решений?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы оставляли какое-нибудь дело из-за боязни не справиться с ним?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Прежде, чем что-то сделать или принять решение, Вы любите подумать?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Ваше настроение улучшается, когда Вас оставляют одного?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы любите что-то придумывать, все переиначивать, делать по-своему, не так, как все?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Ваш внутренний мир заполнен увлечениями и фантазиями, иногда необычными?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <В детстве Вы отличались непослушанием?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы наблюдаете у себя повышенную тягу к развлечениям и удовольствиям?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы не способны сами себя занять и плохо переносите одиночество?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы всегда говорите правду?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы сдержанны и корректны?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_QUESTION <Вы одинаково ведете себя дома и в гостях?>
+	_ANSWER <5>
+	_ANSWER <4>
+	_ANSWER <3>
+	_ANSWER <2>
+	_ANSWER <1>
+_RESULT 
