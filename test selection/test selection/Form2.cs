@@ -42,7 +42,7 @@ namespace test_selection
                     this.Controls.Add(D);
                     size = D.Location.Y + D.Height + 30;
                 }
-                this.SuspendLayout(); //// !!! достаточно хорошо оптимизировала вывод
+                this.SuspendLayout(); //// !!! достаточно хорошо оптимизировала вывод !!!
                 for (int i = 0; i < LQ.Count; i++){
                     LQ[i].Question.Location = new Point(20, size);
                     this.Controls.Add(LQ[i].Question);
@@ -55,7 +55,7 @@ namespace test_selection
                     size += 5;
                 }
                 this.ResumeLayout(false);//!!! достаточно хорошо оптимизировала вывод  
-                BF.Location = new Point(this.Width - 100 - BF.Size.Width, size);
+                BF.Location = new Point( 50, size);
                 this.Controls.Add(BF);
             }
             void Result_TEST(ref List<Questions_Form> T_F,ref List<List<int>> Res) // Формируем вектор ответов на тест.
@@ -103,20 +103,17 @@ namespace test_selection
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
             void TEST_FINISH_Click(object sender, EventArgs e)
             {
-               
                 List<List<int>> Result = new List<List<int>>();
                 Result_TEST(ref TEST_FORM, ref Result);
-                
                 for (int i = 0; i < Result.Count; i++)
                 {
                     if (Result[i].Count == 0)
-                    { MessageBox.Show("Ошибка: вы не ответ на вопрос:  " + (i+1) ); return; }
+                    { MessageBox.Show("Ошибка: вы не ответили на вопрос:  " + (i+1) ); return; }
                     //if (Result[i].Count == 1)
                     //{ MessageBox.Show("Ошибка: вы выбрали несколько вариантов ответа в вопросе:  " + (i + 1)); return; }
                 }
-
                 Form3 FormCreate = new Form3();
-                FormCreate.ResultTest(TEST.Result,Result);
+                FormCreate.ResultTest(TEST.Result,Result,TEST_NAME.Text);
             }
         }
     }

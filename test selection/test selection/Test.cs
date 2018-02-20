@@ -33,7 +33,6 @@ namespace test_selection
             foreach (var i in q.Answer)
                 Answer.Add(i);
         }
-        
     }
     class Test // собственно сам тест для заплнения объектов на форме 
     {
@@ -57,21 +56,14 @@ namespace test_selection
                 List_Question.Add(i);
         }
 
-        string ClearLine(ref int i, ref string line) // выделение строки из текста, отчистка строки от  тегов < > и пробелов в начале и в конце 
+        public  static string ClearLine(ref int i, ref string line, char  l = '<',char r = '>') // выделение строки из текста, отчистка строки от  тегов < > и пробелов в начале и в конце 
         {
-            for (; i < line.Length && line[i] != '<'; i++) ;
+            for (; i < line.Length && line[i] != l; i++) ;
             i++;
             string Line = "";
-            for (; i < line.Length && line[i] != '>'; i++)
+            for (; i < line.Length && line[i] != r; i++)
                 Line += line[i];
             return Line.Trim();
-            //for (; i < line.Length && line[i] != '<'; i++) ;
-            //i++;
-            //int j = i;
-            //string Line = "";
-            //for (; i < line.Length && line[i] != '>'; i++) ;
-            //    Line = line.Substring(j,i-j-1);
-            //return Line.Trim();
         }
         public bool Creat_test(string FileName) // создание теста
         {
@@ -137,63 +129,6 @@ namespace test_selection
                 return false;
             }
         }
-        //public bool Creat_test(string FileName) // создание теста
-        //{
-        //    try
-        //    {
-        //        using (StreamReader sr = new StreamReader(Setting.location_tests + "\\" + FileName, Encoding.Default))
-        //        {
-        //            string keyword = (sr.ReadLine()).Trim();
-        //            while (keyword != null)
-        //            {
-
-        //                switch (keyword) // заполнение класса Test
-        //                {
-        //                    case Key_Words._ANSWER:
-        //                        {
-        //                            this.List_Question[List_Question.Count - 1].Answer.Add((sr.ReadLine()).Trim());
-        //                            break;
-        //                        }
-        //                    case Key_Words._QUESTION:
-        //                        {
-        //                            this.List_Question.Add(new Questions());
-        //                            this.List_Question[List_Question.Count - 1].Question = (sr.ReadLine()).Trim();
-        //                            break;
-        //                        }
-        //                    case Key_Words._NAME:
-        //                        {
-        //                            this.Name = (sr.ReadLine()).Trim();
-        //                            break;
-        //                        }
-        //                    case Key_Words._DESCRIPTION:
-        //                        {
-        //                            this.Description = (sr.ReadLine()).Trim();
-        //                            break;
-        //                        }
-
-        //                    case Key_Words._RESULT:
-        //                        {
-        //                            this.Result = sr.ReadLine();
-        //                            //return false;
-        //                            return true;
-        //                        }
-
-        //                    default:
-        //                        break;
-        //                }
-
-        //                keyword = (sr.ReadLine()).Trim();
-        //            }
-
-        //        }
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("The file could not be read:");
-        //        return false;
-        //    }
-        //}
     }
 
     class Questions_Form // класс объектов теста.
