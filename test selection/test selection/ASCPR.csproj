@@ -80,6 +80,11 @@
     </Compile>
     <Compile Include="Level_of_expression.cs" />
     <Compile Include="Personal_characteristic.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Stored_Exceptions.cs" />
     <Compile Include="Test_selection.cs">
       <SubType>Form</SubType>
@@ -146,14 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="View_Form.resx">
       <DependentUpon>View_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,8 +175,68 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Garbage.txt" />
-    <None Include="Resources\remove.png" />
-    <None Include="Resources\add.png" />
+    <Content Include="Resources\Database\1 10.08.2018.txt" />
+    <Content Include="Resources\Database\10 10.08.2018.txt" />
+    <Content Include="Resources\Database\10.08.2018.txt" />
+    <Content Include="Resources\Database\11 10.08.2018.txt" />
+    <Content Include="Resources\Database\11.08.2018.txt" />
+    <Content Include="Resources\Database\12 10.08.2018.txt" />
+    <Content Include="Resources\Database\13 10.08.2018.txt" />
+    <Content Include="Resources\Database\14 10.08.2018.txt" />
+    <Content Include="Resources\Database\14.08.2018.txt" />
+    <Content Include="Resources\Database\2 10.08.2018.txt" />
+    <Content Include="Resources\Database\22.08.2018.txt" />
+    <Content Include="Resources\Database\3 10.08.2018.txt" />
+    <Content Include="Resources\Database\4 10.08.2018.txt" />
+    <Content Include="Resources\Database\5 10.08.2018.txt" />
+    <Content Include="Resources\Database\6 10.08.2018.txt" />
+    <Content Include="Resources\Database\7 10.08.2018.txt" />
+    <Content Include="Resources\Database\8 10.08.2018.txt" />
+    <Content Include="Resources\Database\9 10.08.2018.txt" />
+    <Content Include="Resources\Database\A B F  1.2.3. 10.08.2018.txt" />
+    <Content Include="Resources\Database\ghb  12.08.2018.txt" />
+    <Content Include="Resources\Database\yjdjt  10.08.2018.txt" />
+    <Content Include="Resources\Design\add.png" />
+    <Content Include="Resources\Design\background_dark.png" />
+    <Content Include="Resources\Design\background_dark_3.png" />
+    <Content Include="Resources\Design\buttonBeforeClicking.png" />
+    <Content Include="Resources\Design\button_touch.png" />
+    <Content Include="Resources\Design\button_true.png" />
+    <Content Include="Resources\Design\remove.png" />
+    <Content Include="Resources\Personal characteristics\Интеллект академический.txt" />
+    <EmbeddedResource Include="Resources\setting.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Resources\Test\1 Тест на оценку самоконтроля в общении.txt" />
+    <Content Include="Resources\Test\10 Тест на профессиональный стресс.txt" />
+    <Content Include="Resources\Test\11 Шкала психологического стресса PSM25.txt" />
+    <Content Include="Resources\Test\13 Опросник суицидального риска.txt" />
+    <Content Include="Resources\Test\15 Насколько Вы готовы к избеганию неудач.txt" />
+    <Content Include="Resources\Test\16 Характерологический опросник %28автор Э.И.Мещерякова%29.txt" />
+    <Content Include="Resources\Test\17 Опросник №2.txt" />
+    <Content Include="Resources\Test\18 Опросник №3 %28PCRS%29. Личностная готовность к переменам.txt" />
+    <Content Include="Resources\Test\19 Суицидальный риск 1.txt" />
+    <Content Include="Resources\Test\2 Тест Умеете ли Вы влиять на других людей.txt" />
+    <Content Include="Resources\Test\20 Измерение личностной тревожности по Спилбергу.txt" />
+    <Content Include="Resources\Test\20 Измерение ситуативной тревожности по Спилбергу.txt" />
+    <Content Include="Resources\Test\21 Тест жизнестойкости С. Мадди.txt" />
+    <Content Include="Resources\Test\22 Опросник уровня тревожности.txt" />
+    <Content Include="Resources\Test\24 Выявление и оценка невротических состояний.txt" />
+    <Content Include="Resources\Test\25 Опросник №1 СМОЛ.txt" />
+    <Content Include="Resources\Test\26 Методика выявления нервно - психической устойчивости.txt" />
+    <Content Include="Resources\Test\27 Характерологический опросник %28опросник К. Леонгарда%29.txt" />
+    <Content Include="Resources\Test\28 Индивидуально - типологический опросник %28Собчик%29.txt" />
+    <Content Include="Resources\Test\29 Опросник Плутчика Келлермана Конте.txt" />
+    <Content Include="Resources\Test\3 Тест Уровень конфликтности.txt" />
+    <Content Include="Resources\Test\30 Тест Кеттела.txt" />
+    <Content Include="Resources\Test\31 Тест Лири.txt" />
+    <Content Include="Resources\Test\32 Многоуровневый личностный опросник Адаптивность %28МЛО-АМ%29.txt" />
+    <Content Include="Resources\Test\4 Оценка чувствительности к кризису.txt" />
+    <Content Include="Resources\Test\5 Тест склонность к риску.txt" />
+    <Content Include="Resources\Test\7 Тест Хартмана.txt" />
+    <Content Include="Resources\Test\8 Тест Оценка мотивации одобрения.txt" />
+    <Content Include="Resources\Test\9 Шкала оценки потребности в достижении.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

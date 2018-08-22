@@ -24,52 +24,49 @@ namespace ASCPR
         public static void Loading_settings()
         {
             StreamReader sr;
-            if (System.IO.File.Exists("setting.txt"))
-                sr = new StreamReader("setting.txt");
-            else
+            using (sr = new StreamReader(@"Resources\\setting.txt"))
             {
-                MessageBox.Show("Ошибка: файл setting.txt не найден");
-                return;
-            }
-            string line;
-            while ((line = sr.ReadLine()) != null)
-            {
-                int i;
-                string key = "";
-                for (i = 0; i < line.Length && line[i] != ' '; i++) key += line[i];
-                switch (key)
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    case _tests:
-                        {
-                            key = Additional_functions.ClearLine(ref i, line);
-                            tests_path = key;
-                            break;
-                        }
-                    case _database:
-                        {
-                            key = Additional_functions.ClearLine(ref i, line);
-                            database_path = key;
-                            break;
-                        }
-                    case _design:
-                        {
-                            key = Additional_functions.ClearLine(ref i, line);
-                            design_path = key;
-                            break;
-                        }
-                    case _characteristics:
-                        {
-                            key = Additional_functions.ClearLine(ref i, line);
-                            characteristics_path = key;
-                            break;
-                        }
-                    case _theme:
-                        {
-                            key = Additional_functions.ClearLine(ref i, line);
-                            theme = key;
-                            break;
-                        }
-                    default: { break; }
+                    int i;
+                    string key = "";
+                    for (i = 0; i < line.Length && line[i] != ' '; i++) key += line[i];
+                    switch (key)
+                    {
+                        case _tests:
+                            {
+                                key = Additional_functions.ClearLine(ref i, line);
+                                tests_path = "..\\..\\" + key;
+                                break;
+                            }
+                        case _database:
+                            {
+                                key = Additional_functions.ClearLine(ref i, line);
+                                database_path = "..\\..\\" + key;
+                                break;
+                            }
+                        case _design:
+                            {
+                                key = Additional_functions.ClearLine(ref i, line);
+                                design_path = "..\\..\\" + key;
+                                break;
+                            }
+                        case _characteristics:
+                            {
+                                key = Additional_functions.ClearLine(ref i, line);
+                                characteristics_path = "..\\..\\" + key;
+                                break;
+                            }
+                        case _theme:
+                            {
+                                key = Additional_functions.ClearLine(ref i, line);
+                                theme = key;
+                                break;
+                            }
+                        default: { break; }
+                    }
+            
                 }
             }
         }

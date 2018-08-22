@@ -73,6 +73,9 @@ namespace ASCPR
             Design.Design_for_label(A_label);
             Design.Design_for_label(P_label);
 
+            button_add_row.BackgroundImage = Design.Background_button_add;
+            button_remove_row.BackgroundImage = Design.Background_button_remove;
+
             Design.Design_for_textbox(CoKey_textbox);
 
             Key_label.Font = new Font("Arial", 24F);

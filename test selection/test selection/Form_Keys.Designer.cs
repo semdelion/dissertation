@@ -138,7 +138,6 @@
             // 
             this.button_remove_row.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_remove_row.BackColor = System.Drawing.Color.Transparent;
-            this.button_remove_row.BackgroundImage = global::test_selection.Properties.Resources.remove;
             this.button_remove_row.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_remove_row.FlatAppearance.BorderSize = 0;
             this.button_remove_row.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))), ((int)(((byte)(30)))));
@@ -154,7 +153,6 @@
             // 
             this.button_add_row.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_add_row.BackColor = System.Drawing.Color.Transparent;
-            this.button_add_row.BackgroundImage = global::test_selection.Properties.Resources.add;
             this.button_add_row.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button_add_row.FlatAppearance.BorderSize = 0;
             this.button_add_row.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))), ((int)(((byte)(30)))));

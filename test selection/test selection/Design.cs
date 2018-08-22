@@ -29,26 +29,27 @@ namespace ASCPR
                 Button_hight = 40;
                 if (theme == "dark")
                 {
-                    Background = new Bitmap(@path + "\\"+ "background_dark.png");
-                    Background_button = new Bitmap(@path + "\\" + "buttonBeforeClicking.png");
-                    Background_button_true = new Bitmap(@path + "\\" + "button_true.png");
-                    Background_button_touch = new Bitmap(@path + "\\" + "button_touch.png");
-                    Background_button_add = new Bitmap(@path + "\\" + "add.png");
-                    Background_button_remove = new Bitmap(@path + "\\" + "remove.png");
+                    
+                    Background = new Bitmap(path + "\\" + "background_dark.png");
+                    Background_button = new Bitmap(path + "\\" + "buttonBeforeClicking.png");
+                    Background_button_true = new Bitmap(path + "\\" + "button_true.png");
+                    Background_button_touch = new Bitmap(path + "\\" + "button_touch.png");
+                    Background_button_add = new Bitmap(path + "\\" + "add.png");
+                    Background_button_remove = new Bitmap(path + "\\" + "remove.png");
                     Font_color = Color.Honeydew;
                     return;
                 }
                 Background = null;
                 Background_button = null;
                 Background_button_touch = null;
-                Background_button_true = new Bitmap(@path + "\\" + "button_true.png");
-                Background_button_add = new Bitmap(@path + "\\" + "add.png");
-                Background_button_remove = new Bitmap(@path + "\\" + "remove.png");
+                Background_button_true = new Bitmap(path + "\\" + "button_true.png");
+                Background_button_add = new Bitmap(path + "\\" + "add.png");
+                Background_button_remove = new Bitmap(path + "\\" + "remove.png");
                 Font_color = Color.Black;
             }
             catch 
             {
-                MessageBox.Show("Ошибка: тема не загуржена");
+                MessageBox.Show("Ошибка: тема не загружена!");
                 Background = null;
                 Background_button = null;
                 Background_button_touch = null;

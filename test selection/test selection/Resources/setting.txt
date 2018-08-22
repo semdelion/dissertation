@@ -1,0 +1,5 @@
+_location_tests <Resources\\Test> 
+_database <Resources\\Database>
+_design <Resources\\Design>
+_personal_characteristics <Resources\\Personal characteristics>
+_theme <dark>

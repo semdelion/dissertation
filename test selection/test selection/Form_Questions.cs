@@ -41,6 +41,9 @@ namespace ASCPR
             Design.Design_for_button(button_left);
             Design.Design_for_button(button_right);
 
+            button_add_answer.BackgroundImage = Design.Background_button_add;
+            button_remove_answer.BackgroundImage = Design.Background_button_remove;
+
             Design.Design_for_label(CoQ_label);
             Design.Design_for_label(CA_label);
             Design.Design_for_label(Q_label);

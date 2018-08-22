@@ -155,7 +155,9 @@ namespace ASCPR
             Design.Design_for_label(label_right_line);
             Design.Design_for_label(label_Fuzzy_set_name);
 
-           
+            button_add_function.BackgroundImage = Design.Background_button_add;
+            button_remove_function.BackgroundImage = Design.Background_button_remove;
+
             Design.Design_for_textbox(CoFuzzy_sets_textBox);
             Design.Design_for_textbox(textBox_fuzzy_set_name);
 
