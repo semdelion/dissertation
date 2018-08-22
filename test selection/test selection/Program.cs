@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace test_selection
+namespace ASCPR
 {
     static class Program
     {
@@ -14,9 +14,11 @@ namespace test_selection
         [STAThread]
         static void Main()
         {
+            Setting.Loading_settings();// loading paths
+            Design.Loading(Setting.design_path, Setting.theme);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ASPD());
         }
     }
 }

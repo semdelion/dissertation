@@ -3,32 +3,101 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace test_selection
+using System.IO;
+using System.Windows.Forms;
+namespace ASCPR
 {
     public static class Setting
     {
-        public static string location_tests= "C:\\Users\\Semdelion\\Documents\\Visual Studio 2017\\GitHun_Projects\\dissertation\\Resource\\Test";
-    }
-    public static class Key_Words
-    {
-        public const string _NAME = "_NAME";
-        public const string _DESCRIPTION = "_DESCRIPTION";
-        public const string _QUESTION = "_QUESTION";
-        public const string _ANSWER = "_ANSWER";
-        public const string _RESULT = "_RESULT";
-        public const string _HELP = "_HELP";
-        public const string _SUM = "_SUM";
-        public const string _SUMR = "_SUMR";
-        public const string _TRUER = "_TRUER";
-        public const string _TRUE = "_TRUE";
-        public const string _IF = "_IF";
-        public const string _TOTALS = "_TOTALS";
-    }
-    public static class FormSize
-    {
-        public static int Form3Y = 0;
-        public static string _HELP = "";
+        private const string _tests = "_location_tests";
+        private const string _database = "_database";
+        private const string _design = "_design";
+        private const string _characteristics = "_personal_characteristics";
+        private const string _theme = "_theme";
+
+        public static string tests_path = "";
+        public static string database_path = "";
+        public static string design_path = "";
+        public static string characteristics_path = "";
+        public static string theme = "";
+
+        public static void Loading_settings()
+        {
+            StreamReader sr;
+            if (System.IO.File.Exists("setting.txt"))
+                sr = new StreamReader("setting.txt");
+            else
+            {
+                MessageBox.Show("Ошибка: файл setting.txt не найден");
+                return;
+            }
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                int i;
+                string key = "";
+                for (i = 0; i < line.Length && line[i] != ' '; i++) key += line[i];
+                switch (key)
+                {
+                    case _tests:
+                        {
+                            key = Additional_functions.ClearLine(ref i, line);
+                            tests_path = key;
+                            break;
+                        }
+                    case _database:
+                        {
+                            key = Additional_functions.ClearLine(ref i, line);
+                            database_path = key;
+                            break;
+                        }
+                    case _design:
+                        {
+                            key = Additional_functions.ClearLine(ref i, line);
+                            design_path = key;
+                            break;
+                        }
+                    case _characteristics:
+                        {
+                            key = Additional_functions.ClearLine(ref i, line);
+                            characteristics_path = key;
+                            break;
+                        }
+                    case _theme:
+                        {
+                            key = Additional_functions.ClearLine(ref i, line);
+                            theme = key;
+                            break;
+                        }
+                    default: { break; }
+                }
+            }
+        }
     }
 
+    public static class Constants_for_the_compiler
+    {
+        public const string Begin_V = @"using System;
+            namespace MyNamespace
+            {
+                public delegate bool V_of_C();
+                public static class LambdaCreator 
+                {
+                    public static V_of_C Create()
+                    {
+                        return ()=>";
+        public const string Begin_C = @"using System;
+            namespace MyNamespace
+            {
+                public delegate double Calc();
+                public static class LambdaCreator 
+                {
+                    public static Calc Create()
+                    {
+                        return ()=>";
+        public const string End = @";
+                    }
+                }
+            }";
+    }
 }

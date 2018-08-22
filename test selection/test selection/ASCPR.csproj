@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6086F1E7-A942-4613-BCD4-04DF78753535}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>test_selection</RootNamespace>
+    <AssemblyName>test selection</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Additional_functions.cs" />
+    <Compile Include="Descriptors.cs" />
+    <Compile Include="Design.cs" />
+    <Compile Include="Form_Keys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Keys.Designer.cs">
+      <DependentUpon>Form_Keys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Header.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Header.Designer.cs">
+      <DependentUpon>Form_Header.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Questions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Questions.Designer.cs">
+      <DependentUpon>Form_Questions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Scales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Scales.Designer.cs">
+      <DependentUpon>Form_Scales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Fuzzy_Sets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Fuzzy_Sets.Designer.cs">
+      <DependentUpon>Form_Fuzzy_Sets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Level_of_expression.cs" />
+    <Compile Include="Personal_characteristic.cs" />
+    <Compile Include="Stored_Exceptions.cs" />
+    <Compile Include="Test_selection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test_selection.Designer.cs">
+      <DependentUpon>Test_selection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Testing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Testing.Designer.cs">
+      <DependentUpon>Testing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Selection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Selection.Designer.cs">
+      <DependentUpon>Form_Selection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main_Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main_Window.Designer.cs">
+      <DependentUpon>Main_Window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test components.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="Test_parser.cs" />
+    <Compile Include="View_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Form.Designer.cs">
+      <DependentUpon>View_Form.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form_Keys.resx">
+      <DependentUpon>Form_Keys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Header.resx">
+      <DependentUpon>Form_Header.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Questions.resx">
+      <DependentUpon>Form_Questions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Scales.resx">
+      <DependentUpon>Form_Scales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Fuzzy_Sets.resx">
+      <DependentUpon>Form_Fuzzy_Sets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test_selection.resx">
+      <DependentUpon>Test_selection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Testing.resx">
+      <DependentUpon>Testing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Selection.resx">
+      <DependentUpon>Form_Selection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Window.resx">
+      <DependentUpon>Main_Window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View_Form.resx">
+      <DependentUpon>View_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Garbage.txt" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace test_selection.Properties
+namespace ASCPR.Properties
 {
 
 

@@ -1,0 +1,1344 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace test_selection
+{
+    public class ParserResultTest
+    {
+        public string Name {get;set;}
+        public string Help { get; set; }
+        public List<string> Point { get; set; }
+        public List<string> Result { get; set; }
+        public ParserResultTest()
+        {
+            Point = new List<string>();
+            Result = new List<string>();
+        }
+        string Trim(string str, ref int i, char l, char r)
+        {
+            for (; i < str.Length && str[i] != l; i++) ;
+            string t = "";
+            for (i++; i < str.Length && str[i] != r; i++)
+                t += str[i];
+            return t;
+        }
+        float calculation(List<float> num, List<char> sign)//калькулятор  
+        {
+            for (int i = 0; i < sign.Count; i++)
+            {
+                switch (sign[i])
+                {
+                    case '/':
+                        {
+                            num[i] = num[i] / num[i + 1];
+                            sign.RemoveAt(i);
+                            num.RemoveAt(i + 1);
+                            i--;
+                            break;
+                        }
+                    case '*':
+                        {
+                            num[i] = num[i] * num[i + 1];
+                            sign.RemoveAt(i);
+                            num.RemoveAt(i + 1);
+                            i--;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+            for (int i = 0; i < sign.Count; i++)
+            {
+                switch (sign[i])
+                {
+                    case '-':
+                        {
+                            num[i] = num[i] - num[i + 1];
+                            sign.RemoveAt(i);
+                            num.RemoveAt(i + 1);
+                            i--;
+                            break;
+                        }
+                    case '+':
+                        {
+                            num[i] = num[i] + num[i + 1];
+                            sign.RemoveAt(i);
+                            num.RemoveAt(i + 1);
+                            i--;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+            if (num.Count == 1)
+            {
+                return num[0];
+            }
+            else
+            {
+                throw new Exception("Ошибка: не верно составлены списки RESsign  и Resfloat");
+            }
+        }
+        void Belongs(string IF, ref int i, float k, string TEXT)
+        {
+            string keyword = "";
+            try
+            {
+                for (i++; i < IF.Length; i++)
+                {
+                    switch (keyword)
+                    {
+                        case "=>":
+                            {
+                                keyword = Trim(IF, ref i, '(', ')');
+                                
+
+                                string l = "", r = "";
+                                bool flag = false;
+                                for (int j = 0; j < keyword.Length; j++)
+                                {
+                                    if (keyword[j] == ';')
+                                    {
+                                        j++;
+                                        flag = true;
+                                    }
+                                    if (!flag)
+                                        l += keyword[j];
+                                    else
+                                        r += keyword[j];
+                                }
+                                string shkala = "";
+                                if (IF[i+1] == '(') /// ГОООООВНИЩЕ!! 
+                                {
+                                    shkala = Trim(IF, ref i, '(', ')');
+                                }
+                                if (Convert.ToInt32(l) <= k && k <= Convert.ToInt32(r))
+                                {
+                                    this.Point.Add("("+shkala+")"+"(Баллов - " + k +  ")");
+                                    this.Result.Add(TEXT);
+                                }
+                                return;
+                            }
+                        default:
+                            keyword += IF[i];
+                            break;
+                    }
+                }
+            }
+            catch
+            {
+                throw new Exception("Ошибка: индекс вне массива, возможно неправильное оформление теста");
+            }
+        }
+        int _SUM(ref string sum, ref List<List<int>> Result)
+        {
+            try
+            {
+                string NewElem = "";
+                List<string> resString = new List<string>();
+                List<int> resInt = new List<int>();
+                List<char> sign = new List<char>();
+                for (int i = 0; i < sum.Length; i++)
+                    if (sum[i] == '+') // разбиваем строку на элементы и знаки
+                    {
+                        resString.Add(NewElem);
+                        sign.Add(sum[i]);
+                        NewElem = "";
+                    }
+                    else
+                        NewElem += sum[i];
+                resString.Add(NewElem);
+                int q = 0;
+                int t = 0;
+                int k;
+                for (int i = 0, j = 0; i < resString.Count; i++, j = 0) // записываем ответы и баллы за данные ответы // TESTING  //// КОРОРОЧОЕ ВЫ В ВЫТАПФ ЫАРПДЛО РДАФЫ РЛОАОР ЫВЛОДА ПЫРАООЛ ТУТ ПИЗДЕЦ
+                {
+                    q = Convert.ToInt32(Trim(resString[i], ref j, '[', ']')) - 1;//номер вопроса 
+                    t = Convert.ToInt32(Trim(resString[i], ref j, '(', ')')) - 1;//вариант ответа
+                    for (k = 0; k < Result[q].Count && Result[q][k] != t; k++) ;
+                    if (k < Result[q].Count) //  [i](j) где i - вопрос а j = ответ  // добавить цикл
+                        resInt.Add(Convert.ToInt32(resString[i].Substring(j + 2, resString[i].Length - j - 2))); //  пропускаем '=' полуаем количество баллов за ответ 
+                    else
+                        resInt.Add(0);
+                }
+                if ((sign.Count + 1) == resInt.Count)
+                {
+                    int i = 0;
+                    for (int j = 0; j < sign.Count; j++)
+                        resInt[0] += resInt[++i];
+                }
+                else
+                    throw new Exception("Ошибка: не верно составлены списки RESsign  и ResInt");
+
+                return resInt[0];
+            }
+            catch
+            {
+                throw new Exception("Ошибка: индекс вне массива, возможно неправильное оформление теста");
+            }
+        }
+        void _SUMR(List<float> RES, ref string TEXT, string IF)
+        {
+            try
+            {
+                int i = 0;
+                string temp = "";
+                string expression = "";
+                expression = Trim(IF, ref i, '[', ']');
+                expression = expression.Replace('\n', ' ').Replace('\r', ' ').Replace(" ", "");
+                List<float> result = new List<float>();
+                List<char> sign = new List<char>();
+
+                for (int j = 0; j < expression.Length; j++)
+                {
+                    switch (expression[j]) // разбиваем строку на элементы и знаки
+                    {
+                        case '(': { result.Add(RES[Convert.ToInt32(Trim(expression, ref j, '(', ')'))]); break; }
+                        case '+':
+                            {
+                                if (temp != "") { result.Add(Convert.ToSingle(temp)); temp = ""; }
+                                sign.Add(expression[j]); break;
+                            }
+                        case '-':
+                            {
+                                if (temp != "") { result.Add(Convert.ToSingle(temp)); temp = ""; }
+                                sign.Add(expression[j]); break;
+                            }
+                        case '*':
+                            {
+                                if (temp != "") { result.Add(Convert.ToSingle(temp)); temp = ""; }
+                                sign.Add(expression[j]); break;
+                            }
+                        case '/':
+                            {
+                                if (temp != "") { result.Add(Convert.ToSingle(temp)); temp = ""; }
+                                sign.Add(expression[j]); break;
+                            }
+                        default:
+                            {
+                                temp += expression[j];
+                                break;
+                            }
+                    }
+                }
+                if (temp != "") { result.Add(Convert.ToSingle(temp)); }
+                Belongs(IF, ref i, calculation(result, sign), TEXT);
+            }
+            catch
+            {
+                throw new Exception("Ошибка: индекс вне массива, возможно неправильное оформление теста");
+            }
+        }
+        public void ResultTest(string TESTResult, List<List<int>> Result, string NAMETEST, string ResText)
+        {
+            ResultParser RES = new ResultParser();
+            string keyword;
+            this.Name = NAMETEST;
+            for (int i = 0; i < TESTResult.Length; i++)
+            {
+                if (TESTResult[i] == '_') // выделение ключевого слова 
+                {
+                    keyword = "";
+                    for (; i < TESTResult.Length && TESTResult[i] != ' '; i++)
+                        keyword += TESTResult[i];
+
+                    switch (keyword) // заполнение класса Test
+                    {
+                        case Key_Words._HELP:
+                            {
+                                this.Help = Test.ClearLine(ref i, ref TESTResult);
+                                break;
+                            }
+                        case Key_Words._SUM:
+                            {
+                                for (; i < TESTResult.Length && TESTResult[i] != ']'; i++) ;
+                                string temp = Test.ClearLine(ref i, ref TESTResult);
+                                temp = temp.Replace('\n', ' ').Replace('\r', ' ').Replace(" ", "");
+                                string t = temp;
+                                RES._SUM.Add(_SUM(ref temp, ref Result));
+                                break;
+                            }
+                        case Key_Words._SUMR:
+                            {
+                                string IF = "";
+                                for (; i < TESTResult.Length && TESTResult[i] != '<'; i++)
+                                    IF += TESTResult[i];
+                                IF = IF.Trim();
+                                string sumr = Test.ClearLine(ref i, ref TESTResult);
+                                _SUMR(RES._SUM, ref sumr, IF);
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+//private void button1_Click_1(object sender, EventArgs e)
+//{
+//    Label HELPLABEL = new Label
+//    {
+//        Text = FormSize._HELP,
+//        AutoSize = true,
+//        MaximumSize = new Size(this.Width - 60, this.Height - 60),
+//        Font = new Font("Arial", 11, FontStyle.Italic),
+//        Location = new Point(60, FormSize.Form3Y + 30)
+//    };
+//    this.Controls.Add(HELPLABEL);
+//    FormSize.Form3Y = HELPLABEL.Height + HELPLABEL.Location.Y;
+//}
+//    }
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+namespace ASCPR
+{
+    /// <summary>
+    /// TODO SHIT CODE
+    /// </summary>
+    public partial class Form3 : Form
+    {
+        private Header header = new Header();
+
+        private List<Questions> questions = new List<Questions>();
+        private int Count_questions = 0;
+        private int Count_answer = 2;
+        private int Question_number = 0;
+
+        private List<Keys> keys = new List<Keys>();
+        private int Count_keys = 0;
+        private int Count_rows = 3;
+        private int Keys_number = 0;
+        
+        private List<Scales> scales = new List<Scales>();
+        private int Count_scales = 0;
+        private int Scales_number = 0;
+
+        public Form3()
+        {
+            InitializeComponent();
+            this.BackgroundImage = Design.Background;
+            this.Show();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+        }
+
+        public void Form_add_new_test(string k = "header")
+        {
+            switch (k)
+            {
+                case "header": { Create_header(); break; }
+                case "questions": { Create_questions(); break;  }
+                case "keys": { Create_keys(); break; }
+                case "scale": { Create_scales(); break; }
+            }
+        }
+        private void Create_label(ref Label label, int x, int y, string text = "")
+        {
+            label.AutoSize = true;
+            label.Location = new Point(x, y);
+            label.BackColor = System.Drawing.Color.Transparent;
+            label.ForeColor = Design.Font_color;
+            label.Font = Design.Font_heading;
+            label.Text = text;
+        }
+        private void Create_button(ref Button button, int x, int y, int width, int height, string text = "")
+        {
+            button.Text = text;
+            button.Width = width;
+            button.Height = height;
+            Design.Design_for_button(ref button);
+            button.Location = new Point(x, y);
+        }
+        private void Create_textbox(TextBox textbox, int width, int x, int y)
+        {
+            textbox.Width = width;
+            textbox.Location = new Point(x, y);
+            textbox.BackColor = System.Drawing.Color.WhiteSmoke;
+            textbox.Font = Design.Font_text;
+        }
+
+        private void Create_header_forms(ref TextBox name_t, ref Button button_create, ref CheckBox CNL, ref CheckBox CAO, ref CheckBox COO, ref TextBox description_t)
+        {
+            int x = 10, y = 10, indent_y = 10;
+            Label name_l = new Label();
+            Create_label(ref name_l, x - 4, y, "Имя теста");
+            this.Controls.Add(name_l);
+            
+            Create_textbox(name_t, this.Width - 35, x, name_l.Location.Y + name_l.Height + indent_y);
+            this.Controls.Add(name_t);
+            name_t.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+
+            Label description_l = new Label();
+            Create_label(ref description_l, x - 4, name_t.Location.Y + name_t.Height + indent_y, "Дополнительная информация");
+            this.Controls.Add(description_l);
+            
+            Create_button(ref button_create, this.Width - Design.Button_width - 25, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Создать");
+            button_create.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right));
+            this.Controls.Add(button_create);
+
+            CNL.AutoSize = true;
+            CNL.Text = "Без ограничений";
+            CNL.BackColor = System.Drawing.Color.Transparent;
+            CNL.ForeColor = Design.Font_color;
+            CNL.Font = Design.Font_heading;
+            CNL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            CNL.Location = new Point(x, button_create.Location.Y - 40);
+            this.Controls.Add(CNL);
+
+            CAO.AutoSize = true;
+            CAO.Text = "Как минимум один";
+            CAO.BackColor = System.Drawing.Color.Transparent;
+            CAO.ForeColor = Design.Font_color;
+            CAO.Font = Design.Font_heading;
+            CAO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            CAO.Location = new Point(x, CNL.Location.Y - CNL.Height - indent_y);
+            this.Controls.Add(CAO);
+
+            COO.AutoSize = true;
+            COO.Text = "Только один";
+            COO.BackColor = System.Drawing.Color.Transparent;
+            COO.ForeColor = Design.Font_color;
+            COO.Font = Design.Font_heading;
+            COO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            COO.Location = new Point(x, CAO.Location.Y - CAO.Height - indent_y);
+            this.Controls.Add(COO);
+
+            Label clamping = new Label();
+            Create_label(ref clamping, x - 4, COO.Location.Y - COO.Height - indent_y, "Возможность ответа");
+            clamping.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(clamping);
+
+            Create_textbox(description_t, this.Width - 35, x, description_l.Location.Y + description_l.Height + indent_y);
+            description_t.Multiline = true;
+            description_t.Height = clamping.Location.Y - clamping.Height - description_l.Location.Y - description_l.Height - indent_y;
+            description_t.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right) | (System.Windows.Forms.AnchorStyles.Bottom)));
+            this.Controls.Add(description_t);
+        }
+        private void Create_header()
+        {
+            TextBox name_t = new TextBox
+            {
+                Text = header.Name
+            };
+            Button button_create = new Button();
+            CheckBox CNL = new CheckBox();
+            CheckBox CAO = new CheckBox();
+            CheckBox COO = new CheckBox();
+            TextBox description_t = new TextBox
+            {
+                Text = header.Description
+            };
+            Create_header_forms(ref name_t, ref button_create, ref CNL, ref CAO, ref COO, ref description_t);
+            if (header.Verifier == Descriptor_name._NO_LIMITS)
+                CNL.Checked = true;
+            else if (header.Verifier == Descriptor_name._AT_LEAST_ONE)
+                CAO.Checked = true;
+            else if (header.Verifier == Descriptor_name._ONLY_ONE)
+                COO.Checked = true;
+            button_create.Click += new EventHandler(button_create_click);
+            void button_create_click(object sender, EventArgs e)
+            {  
+                if (name_t.Text.Trim() != "" && !name_t.Text.Contains('<') && !name_t.Text.Contains('>'))
+                    header.Name = name_t.Text.Trim();
+                else { MessageBox.Show("Ошибка: имя пусто или содержит символы \"<>\""); return; }
+                if (!description_t.Text.Contains('<') && !description_t.Text.Contains('>'))
+                    header.Description = description_t.Text.Trim();
+                else { MessageBox.Show("Ошибка: описание содержит символы \"<>\""); return; }
+                header.Verifier = "";
+                if (CNL.Checked)
+                    header.Verifier = Descriptor_name._NO_LIMITS;
+                else if (CAO.Checked)
+                    header.Verifier = Descriptor_name._AT_LEAST_ONE;
+                else if (COO.Checked)
+                    header.Verifier = Descriptor_name._ONLY_ONE;
+                else { MessageBox.Show("Ошибка: вы не выбрали вариант валидации"); return; }
+                    this.Controls.Clear();
+                Form_add_new_test("questions");
+            }
+        }
+
+        private void Add_answer_on_form(int x, ref int height, TextBox Textbox_answer, ref Panel panel)
+        {
+            Create_textbox(Textbox_answer, x, 110, height);
+            Textbox_answer.Multiline = true;
+            Textbox_answer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            Textbox_answer.Height = 50;
+            Textbox_answer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            panel.Controls.Add(Textbox_answer);
+            height = Textbox_answer.Location.Y + Textbox_answer.Height + 15;
+        }
+        private void Next_qustion(ref TextBox Textbox_question, ref Panel panel, ref List<TextBox> Textbox_answer, ref int height, int x)
+        {
+            Create_textbox(Textbox_question, x - 100, 10, height);
+            Textbox_question.Multiline = true;
+            Textbox_question.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            Textbox_question.Height = 60;
+
+            Textbox_question.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            if (Question_number < questions.Count)
+                Textbox_question.Text = questions[Question_number].Question;
+            else
+                Textbox_question.Text = "";
+            panel.Controls.Add(Textbox_question);
+
+            if (Question_number < questions.Count)
+                Count_answer = questions[Question_number].Answer.Count;
+
+            height = Textbox_question.Location.Y + Textbox_question.Height + 15;
+
+            for (int i = 0; i < Count_answer ; i++)
+            {
+                if (Textbox_answer.Count < Count_answer)
+                    Textbox_answer.Add(new TextBox());
+                
+                Add_answer_on_form(x - 200, ref height, Textbox_answer[i], ref panel);
+            }
+            if (Question_number < questions.Count)
+                for (int i = 0; i < questions[Question_number].Answer.Count; i++)
+                    Textbox_answer[i].Text = questions[Question_number].Answer[i];
+        }
+        private void Create_questions_forms(ref TextBox CoQ_t, ref Button button_create, ref Button button_next , ref Button button_back, ref Label CA_l, ref Panel panel, ref Button button_add_answer, ref Button button_remove_answer)
+        {
+            int x = 10, y = 10, indent_y = 10;
+            Label CoQ_l = new Label();
+            Create_label(ref CoQ_l, x - 4, y, "Количество вопросов");
+            this.Controls.Add(CoQ_l);
+
+            Create_textbox(CoQ_t, 60, CoQ_l.Location.X + CoQ_l.Width + indent_y, y);
+            
+            CoQ_t.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left)));
+            CoQ_t.Text = "";
+            this.Controls.Add(CoQ_t);
+
+            Create_button(ref button_create, x, CoQ_l.Height + CoQ_l.Location.Y + indent_y, CoQ_t.Location.X + CoQ_t.Width - (x - 4), Design.Button_hight, "Cоздать");
+            button_create.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_create);
+
+
+            
+            Create_button(ref button_next, this.Width - Design.Button_width - 25, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Далее");
+            button_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right));
+            this.Controls.Add(button_next);
+
+            Create_button(ref button_back, 12, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Назад");
+            button_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_back);
+
+            panel.Location = new Point(10, button_create.Location.Y + button_create.Height + indent_y + 10);
+            panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel.Text = "";
+            panel.AutoScroll = true;
+            panel.BackColor = Color.Transparent;
+            panel.Width = (this.Width - 40);
+            panel.Height = (button_next.Location.Y - button_create.Location.Y - button_create.Height - 55);
+            panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right) | (System.Windows.Forms.AnchorStyles.Bottom)));
+
+            Create_label(ref CA_l, panel.Width - 250, y, "Количество ответов 2");
+            CA_l.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right)));
+
+            button_add_answer.Font = Design.Font_button;
+            button_add_answer.BackgroundImage = Design.Background_button_add;
+            button_add_answer.ForeColor = Design.Font_color;
+            button_add_answer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            button_add_answer.BackColor = System.Drawing.Color.Transparent;
+            button_add_answer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_add_answer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(10, 30, 99, 30);
+            button_add_answer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(150, 30, 99, 30);
+            button_add_answer.FlatAppearance.BorderSize = 0;
+            button_add_answer.Width = 60;
+            button_add_answer.Height = 60;
+            button_add_answer.Location = new Point(CA_l.Location.X, CA_l.Location.Y + CA_l.Height + indent_y); 
+            button_add_answer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right));
+
+            button_remove_answer.Font = Design.Font_button;
+            button_remove_answer.BackgroundImage = Design.Background_button_remove;
+            button_remove_answer.ForeColor = Design.Font_color;
+            button_remove_answer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            button_remove_answer.BackColor = System.Drawing.Color.Transparent;
+            button_remove_answer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_remove_answer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(10, 99, 30, 30);
+            button_remove_answer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(150,99, 30,30);
+            button_remove_answer.FlatAppearance.BorderSize = 0;
+            button_remove_answer.Width = 60;
+            button_remove_answer.Height = 60;
+            button_remove_answer.Location = new Point(CA_l.Location.X + 140 + indent_y, CA_l.Location.Y + CA_l.Height + indent_y);
+            button_remove_answer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right));
+
+            panel.Controls.Add(CA_l);
+            this.Controls.Add(panel);
+        }
+        private void Create_questions()
+        {
+            this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+            int height = 15;
+            TextBox CoQ_t = new TextBox
+            {
+                Text = Convert.ToString(Count_questions)
+            };
+            Button button_create = new Button();
+            Button button_next = new Button();
+            Button button_back = new Button();
+            Label CA_l = new Label();
+            Panel panel = new Panel();
+            Label Q_l = new Label();
+            Button button_left = new Button();
+            Button button_right = new Button();
+            TextBox CA_t = new TextBox();
+            Button button_add_answer = new Button();
+            Button button_remove_answer = new Button();
+            TextBox Textbox_question = new TextBox();
+            List<TextBox> Textbox_answer = new List<TextBox>();
+            Create_questions_forms(ref CoQ_t, ref button_create, ref button_next, ref button_back,ref CA_l, ref panel, ref button_add_answer, ref button_remove_answer);
+
+            button_create.Click += new EventHandler(button_create_click);
+            button_next.Click += new EventHandler(button_next_click);
+            button_back.Click += new EventHandler(button_back_click);
+            button_add_answer.Click += new EventHandler(button_add_answer_click);
+            button_remove_answer.Click += new EventHandler(button_remove_answer_click);
+            button_left.Click += new EventHandler(button_left_click);
+            button_right.Click += new EventHandler(button_right_click);
+
+            this.ResumeLayout(false);//!!!
+            void button_create_click(object sender, EventArgs e)
+            {
+                try{
+                    this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                    int tmp = Convert.ToInt32(CoQ_t.Text);
+                    if (tmp > 0)
+                    {
+                        if (tmp < questions.Count)
+                        {
+                            Question_number = tmp - 1;
+                            for (int i = questions.Count - 1; i >= tmp; i--)
+                                questions.RemoveAt(i);
+                        }
+                        
+                        height = 15;
+                        panel.Controls.Clear();
+                        Count_questions = tmp;
+                        Create_label(ref Q_l, this.Width / 2 + 30, 15, Q_l.Text = Convert.ToString(Question_number + 1) + " из " + Convert.ToString(Count_questions));
+                        Q_l.Font = new System.Drawing.Font("Arial", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                        Q_l.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+                        Create_button(ref button_left, Q_l.Location.X - 132, 15, Design.Button_width, Design.Button_hight, "Предыдущий");
+                        button_left.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+                        Create_button(ref button_right, Q_l.Location.X + Q_l.Width + 12, 15, Design.Button_width, Design.Button_hight, "Следующий");
+                        button_right.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+                        //////////////////////
+                        Next_qustion(ref Textbox_question, ref panel, ref Textbox_answer, ref height, button_add_answer.Location.X);
+                        //////////////////////
+                        this.Controls.Add(Q_l);
+                        this.Controls.Add(button_left);
+                        this.Controls.Add(button_right);
+                        panel.Controls.Add(CA_l);
+                        panel.Controls.Add(button_add_answer);
+                        panel.Controls.Add(button_remove_answer);
+                        this.ResumeLayout(false);//!!!
+                    }
+                    else
+                    {
+                        this.ResumeLayout(false);//!!!
+                        MessageBox.Show("Ошибка: некорректно задано число вопросов. IS");
+                    }
+                }
+                catch
+                {
+                    this.ResumeLayout(false);//!!!
+                    MessageBox.Show("Ошибка: некорректно задано число вопросов. OS");
+                }
+            }
+            void button_next_click(object sender, EventArgs e)
+            {
+                if (questions.Count != Count_questions || questions.Count == 0)
+                {
+                    MessageBox.Show("Ошибка: не все вопросы заданы");
+                    return;
+                }
+                this.Controls.Clear();
+                Form_add_new_test("keys");
+            }
+            void button_back_click(object sender, EventArgs e)
+            {
+                this.Controls.Clear();
+                Form_add_new_test("header");
+            }
+            void button_add_answer_click(object sender, EventArgs e)
+            {
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                Count_answer ++ ;
+                CA_l.Text = "Количество ответов " + Convert.ToString(Count_answer);
+                Textbox_answer.Add(new TextBox());
+                Add_answer_on_form(button_add_answer.Location.X - 200, ref height, Textbox_answer[Textbox_answer.Count - 1], ref panel);
+                this.ResumeLayout(false);//!!!
+            }
+            void button_remove_answer_click(object sender, EventArgs e)
+            {
+                if (Count_answer <= 0)
+                    return;
+                
+                Count_answer--;
+                CA_l.Text = "Количество ответов " + Convert.ToString(Count_answer);
+                panel.Controls.Remove(Textbox_answer[Count_answer]);
+                Textbox_answer.RemoveAt(Count_answer);
+                if (Count_answer == 0)
+                    height = Textbox_question.Location.Y + Textbox_question.Height + 15;
+                else
+                    height = Textbox_answer[Count_answer - 1].Location.Y + Textbox_answer[Count_answer - 1].Height + 15;
+                this.ResumeLayout(false);//!!!
+            }
+            void button_left_click(object sender, EventArgs e)
+            {
+                //check for the last question 
+                if (Question_number <= 0)
+                    return;
+                //go to the previous question
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                Question_number--;
+                Q_l.Text = Convert.ToString(Question_number + 1) + " из " + Convert.ToString(Count_questions);
+                height = 15;
+                if (questions.Count == 0)
+                    Count_answer = 2;
+                else
+                    Count_answer = questions[Question_number].Answer.Count;
+                CA_l.Text = "Количество ответов " + Convert.ToString(Count_answer);
+                panel.Controls.Remove(Textbox_question);
+                for (int i = 0; i < Textbox_answer.Count; i++)
+                    panel.Controls.Remove(Textbox_answer[i]);
+                Textbox_question = new TextBox();
+                Textbox_answer = new List<TextBox>();
+                Next_qustion(ref Textbox_question, ref panel, ref Textbox_answer, ref height, button_add_answer.Location.X);
+                this.ResumeLayout(false);//!!!
+            }
+            void button_right_click(object sender, EventArgs e)
+            {
+                //check for the correctness of the question and answers
+                if (Textbox_question.Text.Trim() == "" || Textbox_question.Text.Contains('>') || Textbox_question.Text.Contains('<'))
+                { MessageBox.Show("Ошибка: вопрос пуст или содержит символы '<', '>'"); return;}
+                for (int i = 0; i < Textbox_answer.Count; i++)
+                    if (Textbox_answer[i].Text.Trim() == "" || Textbox_answer[i].Text.Contains('>') || Textbox_answer[i].Text.Contains('<'))
+                        { MessageBox.Show("Ошибка: ответы пусты или содержат символы '<', '>'"); return; }
+                //add new question and answers
+                if (questions.Count <= Question_number)
+                    questions.Add(new Questions());
+                questions[Question_number].Question = Textbox_question.Text;
+                for (int i = 0; i < Textbox_answer.Count; i++)
+                    if (questions[Question_number].Answer.Count<=i)
+                        questions[Question_number].Answer.Add(Textbox_answer[i].Text);
+                    else
+                        questions[Question_number].Answer[i]=Textbox_answer[i].Text;
+                if (questions[Question_number].Answer.Count > Textbox_answer.Count)
+                    for (int i = questions[Question_number].Answer.Count-1;  i >= Textbox_answer.Count; i--)
+                        questions[Question_number].Answer.RemoveAt(i);
+                //check for the last question
+                if (Question_number>= Count_questions - 1)
+                    { MessageBox.Show("Добавлен последний вопрос"); return; }
+                //update and add text box on the panel
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                Question_number++;
+                height = 15;
+                Count_answer = questions.Count <= Question_number ? 2 : questions[Question_number].Answer.Count;
+                Q_l.Text = Convert.ToString(Question_number + 1) + " из " + Convert.ToString(Count_questions);
+                CA_l.Text = "Количество ответов " + Convert.ToString(Count_answer);
+                panel.Controls.Remove(Textbox_question);
+                for (int i = Textbox_answer.Count-1; i >= 0; i--)
+                    panel.Controls.Remove(Textbox_answer[i]);
+                Textbox_question = new TextBox();
+                Textbox_answer = new List<TextBox>();
+                Next_qustion(ref Textbox_question, ref panel, ref Textbox_answer, ref height, button_add_answer.Location.X);
+                this.ResumeLayout(false);//!!!
+            }
+        }
+
+        private void Add_rows_on_form(ref int height, ref List<TextBox> form_question, ref List<TextBox> form_answer, ref List<TextBox> form_point, ref Panel panel)
+        {
+            TextBox q = new TextBox();
+            Create_textbox(q, 135, 15, height);
+            q.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+            TextBox a = new TextBox();
+            Create_textbox(a, 135, q.Location.X + q.Width + 15, height);
+            a.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+            TextBox p = new TextBox();
+            Create_textbox(p, 135, a.Location.X + a.Width + 15, height);
+            p.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+
+            form_question.Add(q);
+            form_answer.Add(a);
+            form_point.Add(p);
+            panel.Controls.Add(q);
+            panel.Controls.Add(a);
+            panel.Controls.Add(p);
+            height = q.Location.Y + q.Height + 15;
+        }
+        private void Next_key(ref List<TextBox> form_question, ref List<TextBox> form_answer, ref List<TextBox> form_point, ref Panel panel, ref int height, int x)
+        {
+            if (Keys_number < keys.Count)
+                Count_rows = keys[Keys_number]._Element.Count;
+            for (int i = 0; i < Count_rows; i++)
+                Add_rows_on_form(ref height, ref form_question, ref form_answer, ref form_point, ref panel);
+
+            if (Keys_number < keys.Count)
+                for (int i = 0; i < keys[Keys_number]._Element.Count; i++)
+                {
+                    form_question[i].Text = Convert.ToString(keys[Keys_number]._Element[i].Question);
+                    form_answer[i].Text = Convert.ToString(keys[Keys_number]._Element[i].Answer);
+                    form_point[i].Text = Convert.ToString(keys[Keys_number]._Element[i].Point);
+                }
+        }
+        private void Create_keys_forms(ref TextBox CoQ_t, ref Button button_create, ref Button button_next, ref Button button_back, ref Label CA_l, ref Panel panel, ref Button button_add_answer, ref Button button_remove_answer)
+        {
+            int x = 10, y = 10, indent_y = 10;
+            Label CoQ_l = new Label();
+            Create_label(ref CoQ_l, x - 4, y, "Количество ключей");
+            this.Controls.Add(CoQ_l);
+
+            Create_textbox(CoQ_t, 60, CoQ_l.Location.X + CoQ_l.Width + indent_y, y);
+            CoQ_t.Text = "";
+            CoQ_t.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left)));
+            this.Controls.Add(CoQ_t);
+
+            Create_button(ref button_create, x, CoQ_l.Height + CoQ_l.Location.Y + indent_y, CoQ_t.Location.X + CoQ_t.Width - (x - 4), Design.Button_hight, "Cоздать");
+            button_create.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_create);
+
+            
+            Create_button(ref button_next, this.Width - Design.Button_width - 25, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Далее");
+            button_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right));
+            this.Controls.Add(button_next);
+
+            Create_button(ref button_back, 10, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Назад");
+            button_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_back);
+
+            panel.Location = new Point(10, button_create.Location.Y + button_create.Height + indent_y + 10);
+            panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel.Text = "";
+            panel.AutoScroll = true;
+            panel.BackColor = Color.Transparent;
+            panel.Width = (this.Width - 40);
+            panel.Height = (button_next.Location.Y - button_create.Location.Y - button_create.Height - 55);
+            panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right) | (System.Windows.Forms.AnchorStyles.Bottom)));
+
+            Create_label(ref CA_l, panel.Width - 250, y, "Количество строк " + Convert.ToString(Count_rows));
+            CA_l.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right)));
+
+            button_add_answer.Font = Design.Font_button;
+            button_add_answer.BackgroundImage = Design.Background_button_add;
+            button_add_answer.ForeColor = Design.Font_color;
+            button_add_answer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            button_add_answer.BackColor = System.Drawing.Color.Transparent;
+            button_add_answer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_add_answer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(10, 30, 99, 30);
+            button_add_answer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(150, 30, 99, 30);
+            button_add_answer.FlatAppearance.BorderSize = 0;
+            button_add_answer.Width = 60;
+            button_add_answer.Height = 60;
+            button_add_answer.Location = new Point(CA_l.Location.X, CA_l.Location.Y + CA_l.Height + indent_y);
+            button_add_answer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right));
+
+            button_remove_answer.Font = Design.Font_button;
+            button_remove_answer.BackgroundImage = Design.Background_button_remove;
+            button_remove_answer.ForeColor = Design.Font_color;
+            button_remove_answer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            button_remove_answer.BackColor = System.Drawing.Color.Transparent;
+            button_remove_answer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            button_remove_answer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(10, 99, 30, 30);
+            button_remove_answer.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(150, 99, 30, 30);
+            button_remove_answer.FlatAppearance.BorderSize = 0;
+            button_remove_answer.Width = 60;
+            button_remove_answer.Height = 60;
+            button_remove_answer.Location = new Point(CA_l.Location.X + 140 + indent_y, CA_l.Location.Y + CA_l.Height + indent_y);
+            button_remove_answer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Right));
+
+            panel.Controls.Add(CA_l);
+            this.Controls.Add(panel);
+        }
+        private void Create_keys()
+        {
+            this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+            int height = 15;
+            TextBox CoQ_t = new TextBox
+            {
+                Text = Convert.ToString(Count_questions)
+            };
+            Button button_create = new Button();
+            Button button_next = new Button();
+            Button button_back = new Button();
+            Label CA_l = new Label();
+            Panel panel = new Panel();
+            Label Q_l = new Label();
+            Button button_left = new Button();
+            Button button_right = new Button();
+            TextBox CA_t = new TextBox();
+            Button button_add_answer = new Button();
+            Button button_remove_answer = new Button();
+            List<TextBox> form_question = new List<TextBox>();
+            List<TextBox> form_answer = new List<TextBox>();
+            List<TextBox> form_point = new List<TextBox>();
+            Label form_q = new Label();
+            Label form_a = new Label();
+            Label form_p = new Label();
+
+            Create_keys_forms(ref CoQ_t, ref button_create, ref button_next, ref button_back, ref CA_l, ref panel, ref button_add_answer, ref button_remove_answer);
+            
+            button_next.Click += new EventHandler(button_next_click);
+            button_back.Click += new EventHandler(button_back_click);
+            button_create.Click += new EventHandler(button_create_click);
+
+            button_add_answer.Click += new EventHandler(button_add_answer_click);
+            button_remove_answer.Click += new EventHandler(button_remove_answer_click);
+            button_left.Click += new EventHandler(button_left_click);
+            button_right.Click += new EventHandler(button_right_click);
+            this.ResumeLayout(false);//!!!
+            void button_create_click(object sender, EventArgs e)
+            {
+                try
+                {
+                    this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                    int tmp = Convert.ToInt32(CoQ_t.Text);
+                    if (tmp > 0)
+                    {
+                        if (tmp < keys.Count)
+                        {
+                            Keys_number = tmp - 1;
+                            for (int i = keys.Count - 1; i >= tmp; i--)
+                                keys.RemoveAt(i);
+                        }
+                        height = 15;
+                        panel.Controls.Clear();
+                        Count_keys = tmp;
+                        Create_label(ref Q_l, this.Width / 2 + 30, 15, Q_l.Text = Convert.ToString(Keys_number + 1) + " из " + Convert.ToString(Count_keys));
+                        Q_l.Font = new System.Drawing.Font("Arial", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                        Q_l.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+
+                        Create_button(ref button_left, Q_l.Location.X - 132, 15, Design.Button_width, Design.Button_hight, "Предыдущий");
+                        button_left.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+                        Create_button(ref button_right, Q_l.Location.X + Q_l.Width + 12, 15, Design.Button_width, Design.Button_hight, "Следующий");
+                        button_right.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+
+                        Create_label(ref form_q, 12, 15, "Вопрос");
+                        form_q.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+                        Create_label(ref form_a, 162, 15, "Ответ");
+                        form_a.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+                        Create_label(ref form_p, 312, 15, "Балл");
+                        form_p.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+
+                        height = form_q.Location.Y + form_q.Height + 15;
+                        //////////////////////
+                        Next_key(ref form_question, ref form_answer, ref form_point, ref panel, ref height, button_add_answer.Location.X);
+                        //////////////////////
+                        this.Controls.Add(Q_l);
+                        this.Controls.Add(button_left);
+                        this.Controls.Add(button_right);
+                        panel.Controls.Add(form_q);
+                        panel.Controls.Add(form_a);
+                        panel.Controls.Add(form_p);
+                        panel.Controls.Add(CA_l);
+                        panel.Controls.Add(button_add_answer);
+                        panel.Controls.Add(button_remove_answer);
+                        this.ResumeLayout(false);//!!!
+                    }
+                    else
+                    {
+                        this.ResumeLayout(false);//!!!
+                        MessageBox.Show("Ошибка: некорректно задано число вопросов. IS");
+                    }
+                }
+                catch
+                {
+                    this.ResumeLayout(false);//!!!
+                    MessageBox.Show("Ошибка: некорректно задано число вопросов. OS");
+                }
+            }
+            void button_add_answer_click(object sender, EventArgs e)
+            {
+                Count_rows++;
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                CA_l.Text = "Количество строк " + Convert.ToString(Count_rows);
+                Add_rows_on_form(ref height, ref form_question, ref form_answer, ref form_point, ref panel);
+                this.ResumeLayout(false);//!!!
+            }
+            void button_remove_answer_click(object sender, EventArgs e)
+            {
+                if (Count_rows <= 0)
+                    return;
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                Count_rows--;
+                CA_l.Text = "Количество строк " + Convert.ToString(Count_rows);
+                panel.Controls.Remove(form_question[Count_rows]);
+                panel.Controls.Remove(form_answer[Count_rows]);
+                panel.Controls.Remove(form_point[Count_rows]);
+                form_question.RemoveAt(Count_rows);
+                form_answer.RemoveAt(Count_rows);
+                form_point.RemoveAt(Count_rows);
+                if (Count_rows == 0)
+                    height = form_q.Location.Y + form_q.Height + 15;
+                else
+                    height = form_question[Count_rows - 1].Location.Y + form_question[Count_rows - 1].Height + 15;
+                this.ResumeLayout(false);//!!!
+            }
+            void button_left_click(object sender, EventArgs e)
+            {
+                //check for the last question 
+                if (Keys_number <= 0)
+                    return;
+                //go to the previous question
+                this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                Keys_number--;
+                Q_l.Text = Convert.ToString(Keys_number + 1) + " из " + Convert.ToString(Count_keys);
+                height = form_q.Location.Y + form_q.Height + 15;
+                if (questions.Count == 0)
+                    Count_answer = 3;
+                else
+                    Count_rows = keys[Keys_number]._Element.Count;
+                CA_l.Text = "Количество строк " + Convert.ToString(Count_rows);
+                for (int i = 0; i < form_question.Count; i++)
+                {
+                    panel.Controls.Remove(form_question[i]);
+                    panel.Controls.Remove(form_answer[i]);
+                    panel.Controls.Remove(form_point[i]);
+                }
+                form_question = new List<TextBox>();
+                form_answer = new List<TextBox>();
+                form_point = new List<TextBox>();
+                Next_key(ref form_question, ref form_answer, ref form_point, ref panel, ref height, button_add_answer.Location.X);
+                this.ResumeLayout(false);//!!!
+            }
+            void button_right_click(object sender, EventArgs e)
+            {
+                try
+                {
+                    //check for the correctness of the question and answers
+                    for (int i = 0; i < form_question.Count; i++)
+                        if (form_question[i].Text.Trim() == "" || form_answer[i].Text.Trim() == "" || form_point[i].Text.Trim() == "")
+                        { MessageBox.Show("Ошибка: ключ содержит ошибки в строке - " + Convert.ToString(i + 1)); return; }
+                    //add new question and answers
+                    if (keys.Count <= Keys_number)
+                        keys.Add(new Keys());
+                    for (int i = 0; i < form_question.Count; i++)
+                    {
+                        if (keys[Keys_number]._Element.Count <= i)
+                            keys[Keys_number]._Element.Add(new Element());
+                        keys[Keys_number]._Element[i].Question = Convert.ToInt32(form_question[i].Text);
+                        keys[Keys_number]._Element[i].Answer = Convert.ToInt32(form_answer[i].Text);
+                        keys[Keys_number]._Element[i].Point = Convert.ToSingle(form_point[i].Text);
+                    }
+                    if (keys[Keys_number]._Element.Count > form_question.Count)
+                        for (int i = keys[Keys_number]._Element.Count - 1; i >= form_question.Count; i--)
+                            keys[Keys_number]._Element.RemoveAt(i);
+                    //check for the last question
+                    if (Keys_number >= Count_keys - 1)
+                    { MessageBox.Show("Добавлен последний ключ"); return; }
+                    //update and add text box on the panel
+                    Keys_number++;
+                    height = form_q.Location.Y + form_q.Height + 15;
+                    Count_rows = keys.Count <= Keys_number ? 3 : keys[Keys_number]._Element.Count;
+                    this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                    Q_l.Text = Convert.ToString(Keys_number + 1) + " из " + Convert.ToString(Count_keys);
+                    CA_l.Text = "Количество строк " + Convert.ToString(Count_rows);
+                    for (int i = form_question.Count - 1; i >= 0; i--)
+                    {
+                        panel.Controls.Remove(form_question[i]);
+                        panel.Controls.Remove(form_answer[i]);
+                        panel.Controls.Remove(form_point[i]);
+                    }
+                    form_question = new List<TextBox>();
+                    form_answer = new List<TextBox>();
+                    form_point = new List<TextBox>();
+                    Next_key(ref form_question, ref form_answer, ref form_point, ref panel, ref height, button_add_answer.Location.X);
+                    this.ResumeLayout(false);//!!!
+                }
+                catch
+                {
+                    this.ResumeLayout(false);//!!!
+                    MessageBox.Show("Ошибка: Ключ содержит ошибки "); 
+                }  
+            }
+            void button_next_click(object sender, EventArgs e)
+            {
+                if (keys.Count != Count_keys || keys.Count == 0)
+                {
+                    MessageBox.Show("Ошибка: не все ключи заданы");
+                    return;
+                }
+                this.Controls.Clear();
+                Form_add_new_test("scale");
+            }
+            void button_back_click(object sender, EventArgs e)
+            {
+                this.Controls.Clear();
+                Form_add_new_test("questions");
+            }
+
+        }
+
+        private void Next_scale(ref TextBox form_scale_t, ref TextBox form_name_scale_t, ref TextBox form_text_t)
+        {
+            if (Scales_number < scales.Count)
+            {
+                form_scale_t.Text = scales[Scales_number].If_scale;
+                form_name_scale_t.Text = scales[Scales_number].Name_scale;
+                form_text_t.Text = scales[Scales_number].Manifestation;
+            }
+            else
+            {
+                form_scale_t.Text = "";
+                form_name_scale_t.Text = "";
+                form_text_t.Text = "";
+            }
+        }
+        private void Create_scale_forms(ref TextBox CoQ_t, ref Button button_create, ref Button button_next, ref Button button_back, ref Panel panel/*, ref Button button_add_answer, ref Button button_remove_answer*/)
+        {
+            int x = 10, y = 10, indent_y = 10;
+            Label CoQ_l = new Label();
+            Create_label(ref CoQ_l, x - 4, y, "Количество интерпретаций");
+            this.Controls.Add(CoQ_l);
+
+            Create_textbox(CoQ_t, 60, CoQ_l.Location.X + CoQ_l.Width + indent_y, y);
+
+            CoQ_t.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left)));
+            CoQ_t.Text = "";
+            this.Controls.Add(CoQ_t);
+
+            Create_button(ref button_create, x, CoQ_l.Height + CoQ_l.Location.Y + indent_y, CoQ_t.Location.X + CoQ_t.Width - (x - 4), Design.Button_hight, "Cоздать");
+            button_create.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_create);
+
+            Create_button(ref button_next, this.Width - Design.Button_width - 25, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Далее");
+            button_next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right));
+            this.Controls.Add(button_next);
+
+            Create_button(ref button_back, 12, this.Height - Design.Button_hight - 50, Design.Button_width, Design.Button_hight, "Назад");
+            button_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left));
+            this.Controls.Add(button_back);
+
+            panel.Location = new Point(12, button_create.Location.Y + button_create.Height + indent_y + 10);
+            panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel.Text = "";
+            panel.AutoScroll = true;
+            panel.BackColor = Color.Transparent;
+            panel.Width = (this.Width - 40);
+            panel.Height = (button_next.Location.Y - button_create.Location.Y - button_create.Height - 55);
+            panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right) | (System.Windows.Forms.AnchorStyles.Bottom)));
+            this.Controls.Add(panel);
+        }
+        private void Create_scales()
+        {
+            this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+            TextBox CoQ_t = new TextBox
+            {
+                Text = Convert.ToString(Count_questions)
+            };
+            Button button_create = new Button();
+            Button button_next = new Button();
+            Button button_back = new Button();
+            Panel panel = new Panel();
+            Label Q_l = new Label();
+            Button button_left = new Button();
+            Button button_right = new Button();
+
+            TextBox form_scale_t = new TextBox();
+            TextBox form_name_scale_t = new TextBox();
+            TextBox form_text_t = new TextBox();
+            Label form_scale = new Label();
+            Label form_name_scale = new Label();
+            Label form_text = new Label();
+
+            Create_scale_forms(ref CoQ_t, ref button_create, ref button_next, ref button_back,ref panel);
+
+            button_next.Click += new EventHandler(button_next_click);
+            button_back.Click += new EventHandler(button_back_click);
+            button_create.Click += new EventHandler(button_create_click);
+            button_left.Click += new EventHandler(button_left_click);
+            button_right.Click += new EventHandler(button_right_click);
+            this.ResumeLayout(false);//!!!
+            void button_create_click(object sender, EventArgs e)
+            {
+                try
+                {
+                    this.SuspendLayout();//// !!! Временно приостанавливает логику компоновки для элемента управления.
+                    int tmp = Convert.ToInt32(CoQ_t.Text);
+                    if (tmp > 0)
+                    {
+                        if (tmp < scales.Count)
+                        {
+                            Scales_number = tmp - 1;
+                            for (int i = scales.Count - 1; i >= tmp; i--)
+                                scales.RemoveAt(i);
+                        }
+                        panel.Controls.Clear();
+                        Count_scales = tmp;
+
+                        Create_label(ref Q_l, this.Width / 2 + 30, 15, Q_l.Text = Convert.ToString(Scales_number + 1) + " из " + Convert.ToString(Count_scales));
+                        Q_l.Font = new System.Drawing.Font("Arial", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                        Q_l.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+
+                        Create_button(ref button_left, Q_l.Location.X - 132, 15, Design.Button_width, Design.Button_hight, "Предыдущий");
+                        button_left.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+                        Create_button(ref button_right, Q_l.Location.X + Q_l.Width + 20, 15, Design.Button_width, Design.Button_hight, "Следующий");
+
+                        button_right.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top));
+
+                        Create_label(ref form_scale, 12, 15, "Номер шкалы");
+                        form_scale.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+                        Create_label(ref form_name_scale, 362, 15, "Имя шкалы");
+                        form_name_scale.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+                        
+
+                        Create_textbox(form_scale_t, 335, 15, form_scale.Location.Y + form_scale.Height + 15);
+                        Create_textbox(form_name_scale_t, 335, 365, form_scale.Location.Y + form_scale.Height + 15);
+
+                        Create_label(ref form_text, 12, form_scale_t.Location.Y + form_scale_t.Height + 15, "Текст");
+                        form_text.Anchor = ((System.Windows.Forms.AnchorStyles)(System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left);
+
+                        Create_textbox(form_text_t, panel.Width - 30, 15, form_text.Location.Y + form_text.Height + 15);
+                        form_text_t.Multiline = true;
+                        form_text_t.Height = panel.Height - form_text_t.Location.Y - 15;
+                        form_text_t.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right) | (System.Windows.Forms.AnchorStyles.Bottom)));
+
+                        ////////////////////////
+                        Next_scale(ref form_scale_t, ref form_name_scale_t, ref form_text_t);
+                        ////////////////////////
+                        this.Controls.Add(Q_l);
+                        this.Controls.Add(button_left);
+                        this.Controls.Add(button_right);
+                        panel.Controls.Add(form_scale);
+                        panel.Controls.Add(form_name_scale);
+                        panel.Controls.Add(form_scale_t);
+                        panel.Controls.Add(form_name_scale_t);
+                        panel.Controls.Add(form_text);
+                        panel.Controls.Add(form_text_t);
+                        this.ResumeLayout(false);//!!!
+                    }
+                    else
+                    {
+                        this.ResumeLayout(false);//!!!
+                        MessageBox.Show("Ошибка: некорректно задано число вопросов.");
+                    }
+                }
+                catch
+                {
+                    this.ResumeLayout(false);//!!!
+                    MessageBox.Show("Ошибка: некорректно задано число вопросов.");
+                }
+            }
+            void button_left_click(object sender, EventArgs e)
+            {
+                //check for the last question 
+                if (Scales_number <= 0)
+                    return;
+                //go to the previous question
+                Scales_number--;
+                Q_l.Text = Convert.ToString(Scales_number + 1) + " из " + Convert.ToString(Count_scales);
+                Next_scale(ref form_scale_t, ref form_name_scale_t, ref form_text_t);
+            }
+            void button_right_click(object sender, EventArgs e)
+            {
+                try
+                {
+                    //check for the correctness of the question and answers
+                    if (form_scale_t.Text.Trim() == "" || form_scale_t.Text.Contains('[') || form_scale_t.Text.Contains(']'))
+                       { MessageBox.Show("Ошибка: Номер шкалы задан неверно: \n\r 1)Содержит символы '[' или ']' \n\r 2)Шкала указывается в ( ), нумерация шкал начинается с 0."); return; }
+                    if (form_name_scale_t.Text.Trim() == "" || form_name_scale_t.Text.Contains('(') || form_name_scale_t.Text.Contains(')'))
+                        { MessageBox.Show("Ошибка: Имя шкалы задано неверно."); return; }
+                    if (form_text_t.Text.Trim() == "" || form_text_t.Text.Contains('<') || form_text_t.Text.Contains('>'))
+                        { MessageBox.Show("Ошибка: Текст задан неверно. Недопустимые символы '<' '>'"); return; }
+                    //add new question and answers
+                    if (scales.Count <= Scales_number)
+                        scales.Add(new Scales());
+
+                    scales[Scales_number].If_scale = form_scale_t.Text;
+                    scales[Scales_number].Name_scale = form_name_scale_t.Text;
+                    scales[Scales_number].Manifestation = form_text_t.Text;
+                    //check for the last question
+                    if (Scales_number >= Count_scales - 1)
+                        { MessageBox.Show("Добавлена последняя интерпретация"); return; }
+                    Scales_number++;
+                    Q_l.Text = Convert.ToString(Scales_number + 1) + " из " + Convert.ToString(Count_scales);
+                    Next_scale(ref form_scale_t, ref form_name_scale_t, ref form_text_t);
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка: Интерпретация содержит ошибки ");
+                }
+            }
+            void button_next_click(object sender, EventArgs e)
+            {
+                if (scales.Count != Count_scales || scales.Count == 0)
+                {
+                    MessageBox.Show("Ошибка: не все интерпретации заданы");
+                    return;
+                }
+                Create_file();
+                this.Controls.Clear();
+               
+            }
+            void button_back_click(object sender, EventArgs e)
+            {
+                this.Controls.Clear();
+                Form_add_new_test("keys");
+            }
+        }
+
+        private void Create_file()
+        {
+            Random t = new Random();
+            string fileName = "";
+            fileName = header.Name;
+            try
+            {
+                StreamWriter sr;
+                if (System.IO.File.Exists(Setting.tests_path + "\\" + fileName + ".txt"))
+                    sr = new StreamWriter(fileName = Setting.tests_path + "\\" + fileName + "_" + t.Next(0, 10000) + ".txt",true,Encoding.UTF8);
+                else
+                    sr = new StreamWriter(fileName = Setting.tests_path + "\\" + fileName + ".txt",true, Encoding.UTF8);
+                
+                sr.WriteLine(Descriptor_name._NAME + " <" + header.Name + ">");
+                sr.WriteLine(Descriptor_name._DESCRIPTION + " <" + header.Description + ">");
+                sr.WriteLine(Descriptor_name._VERIFIER + " <" + header.Verifier + ">");
+                for (int i = 0; i < questions.Count; i++)
+                {
+                    sr.WriteLine(Descriptor_name._QUESTION + " <" + questions[i].Question + ">");
+                    for (int j = 0; j < questions[i].Answer.Count; j++)
+                        sr.WriteLine(Descriptor_name._ANSWER + " <" + questions[i].Answer[j] + ">");
+                }
+                for (int i = 0; i < keys.Count; i++)
+                {
+                    sr.WriteLine(Descriptor_name._KEY + " [" + i + "]" + "<");
+                    for (int j = 0; j < keys[i]._Element.Count - 1; j++)
+                        sr.WriteLine("[" + keys[i]._Element[j].Question + "]" + "("+ keys[i]._Element[j].Answer + ")=" + keys[i]._Element[j].Point + "+");
+                    sr.WriteLine("[" + keys[i]._Element[keys[i]._Element.Count - 1].Question + "]" + "(" + keys[i]._Element[keys[i]._Element.Count - 1].Answer + ")=" + keys[i]._Element[keys[i]._Element.Count - 1].Point + ">");
+                }
+                for (int i = 0; i < scales.Count; i++)
+                {
+                    sr.WriteLine(Descriptor_name._SCALE + " [" + scales[i].If_scale + "]"  + "(" + scales[i].Name_scale + ") ");
+                    sr.WriteLine("<" + scales[i].Manifestation + ">");
+                }
+                sr.Close();
+                MessageBox.Show("Файл добавлен");
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка: невозможно создать файл с отчётом.");
+            }
+        }
+    }
+}
+    

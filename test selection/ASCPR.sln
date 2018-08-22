@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASCPR", "test selection\ASCPR.csproj", "{6086F1E7-A942-4613-BCD4-04DF78753535}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6086F1E7-A942-4613-BCD4-04DF78753535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6086F1E7-A942-4613-BCD4-04DF78753535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6086F1E7-A942-4613-BCD4-04DF78753535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6086F1E7-A942-4613-BCD4-04DF78753535}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3808D28-3B01-4E1E-8BB8-3E938489391C}
+	EndGlobalSection
+EndGlobal
