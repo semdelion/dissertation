@@ -11,13 +11,13 @@ namespace ASCPR
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Verifier { get; set; }
+        public VerificationDescriptors Verifier { get; set; }
 
         public Header()
         {
             Name = "";
             Description = "";
-            Verifier = "";
+            Verifier = 0;
         }
 
         public Header(Header h)
@@ -54,8 +54,7 @@ namespace ASCPR
 
         public Element()
         {
-            Question = 0;
-            Answer = 0;
+            Question = Answer = 0;
             Point = 0;
         }
 
@@ -79,8 +78,8 @@ namespace ASCPR
 
         public Element this[int index]
         {
-            get { return _Element[index]; }
-            set { _Element[index] = value; }
+            get => _Element[index]; 
+            set => _Element[index] = value; 
         }
 
         public void Add(Element el) => _Element.Add(el);
@@ -100,13 +99,8 @@ namespace ASCPR
         public string Name_scale { get; private set; }
         public string Manifestation { get; private set; }
 
-        public Scale()
-        {
-            If_scale = "";
-            Name_scale = "";
-            Manifestation = "";
-        }
-
+        public Scale() => If_scale = Name_scale = Manifestation = "";
+        
         public Scale(Scale s)
         {
             If_scale = s.If_scale;
@@ -133,7 +127,7 @@ namespace ASCPR
             A = new PointF();
             B = new PointF();
         }
-
+        
         public Line(Line L)
         {
             A = L.A;
@@ -224,8 +218,8 @@ namespace ASCPR
         List<int> Answers;
         public int this[int index]
         {
-            get { return Answers[index]; }
-            set { Answers[index] = value; }
+            get => Answers[index]; 
+            set => Answers[index] = value; 
         }
         public void Add(int el) => Answers.Add(el);
 
@@ -244,8 +238,8 @@ namespace ASCPR
 
         public Answers_to_question this[int index]
         {
-            get { return Answers_to_the_questions[index]; }
-            set { Answers_to_the_questions[index] = value; }
+            get => Answers_to_the_questions[index]; 
+            set => Answers_to_the_questions[index] = value; 
         }
 
         public void Add(Answers_to_question ans_q) => Answers_to_the_questions.Add(ans_q);

@@ -79,7 +79,7 @@ namespace ASCPR
 
         private void Create_Functions(Test TEST, int index = 0)
         {
-            C_Function_label.Text = "Количество функций " + Convert.ToString(TEST._Fuzzy_sets[Fuzzy_sets_number].Functions.Count);
+            C_Function_label.Text = $"Количество функций {Convert.ToString(TEST._Fuzzy_sets[Fuzzy_sets_number].Functions.Count)}";
             int height;
             if (index == 0)
                 height = label_left_line.Location.Y + label_left_line.Height + 15;
@@ -116,7 +116,7 @@ namespace ASCPR
         private void Create_Fuzzy_sets(Test TEST)
         {
             this.SuspendLayout();
-            Fuzzy_sets_label.Text = Convert.ToString(Fuzzy_sets_number + 1) + " / " + Convert.ToString(TEST._Fuzzy_sets.Count);
+            Fuzzy_sets_label.Text = $"{Convert.ToString(Fuzzy_sets_number + 1)} / {Convert.ToString(TEST._Fuzzy_sets.Count)}";
             textBox_fuzzy_set_name.Text = TEST._Fuzzy_sets[Fuzzy_sets_number].Name;
             Clear_panel();
             Show_O();
@@ -127,13 +127,13 @@ namespace ASCPR
             textBox_right_x2 = new List<TextBox>();
             for (int i = 0; i < TEST._Fuzzy_sets[Fuzzy_sets_number].Functions.Count; i++)
             {
-                textBox_left_x1.Add( new TextBox());
-                textBox_left_x2.Add( new TextBox());
+                textBox_left_x1.Add(new TextBox());
+                textBox_left_x2.Add(new TextBox());
                 textBox_right_x1.Add(new TextBox());
                 textBox_right_x2.Add(new TextBox());
             }
             Create_Functions(TEST);
-            Button_Show_Click(null,null);
+            Button_Show_Click(null, null);
             this.ResumeLayout(false);
         }
 
@@ -179,8 +179,8 @@ namespace ASCPR
 
             Pen pen = new Pen(Brushes.Blue, 3);
 
-            g.DrawLine(pen, (a.X * scope_x) + 25, a.Y == 0 ? (pictureBox_Fuzzy_sets.Height - 25) : 25, 
-                (b.X * scope_x) + 25, b.Y == 0 ? (pictureBox_Fuzzy_sets.Height - 25 ):  25);
+            g.DrawLine(pen, (a.X * scope_x) + 25, a.Y == 0 ? (pictureBox_Fuzzy_sets.Height - 25) : 25,
+                (b.X * scope_x) + 25, b.Y == 0 ? (pictureBox_Fuzzy_sets.Height - 25) : 25);
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             if (a.Y == 1)
                 g.DrawLine(pen, a.X * scope_x + 25, pictureBox_Fuzzy_sets.Height - 25, a.X * scope_x + 25, 25);
@@ -195,12 +195,12 @@ namespace ASCPR
             My_bitmap = new Bitmap(pictureBox_Fuzzy_sets.Width, pictureBox_Fuzzy_sets.Height);
             Graphics g = Graphics.FromImage(My_bitmap);
             g.DrawLine(new Pen(Brushes.Black, 2), 10, pictureBox_Fuzzy_sets.Height - 25, pictureBox_Fuzzy_sets.Width - 20, pictureBox_Fuzzy_sets.Height - 25);
-                g.DrawLine(new Pen(Brushes.Black, 2), pictureBox_Fuzzy_sets.Width - 25, pictureBox_Fuzzy_sets.Height - 20, pictureBox_Fuzzy_sets.Width - 20, pictureBox_Fuzzy_sets.Height - 25);
-                g.DrawLine(new Pen(Brushes.Black, 2), pictureBox_Fuzzy_sets.Width - 25, pictureBox_Fuzzy_sets.Height - 30, pictureBox_Fuzzy_sets.Width - 20, pictureBox_Fuzzy_sets.Height - 25);
+            g.DrawLine(new Pen(Brushes.Black, 2), pictureBox_Fuzzy_sets.Width - 25, pictureBox_Fuzzy_sets.Height - 20, pictureBox_Fuzzy_sets.Width - 20, pictureBox_Fuzzy_sets.Height - 25);
+            g.DrawLine(new Pen(Brushes.Black, 2), pictureBox_Fuzzy_sets.Width - 25, pictureBox_Fuzzy_sets.Height - 30, pictureBox_Fuzzy_sets.Width - 20, pictureBox_Fuzzy_sets.Height - 25);
 
             g.DrawLine(new Pen(Brushes.Black, 2), 20, pictureBox_Fuzzy_sets.Height - 10, 20, 10);
-                g.DrawLine(new Pen(Brushes.Black, 2), 15, 15, 20, 10);
-                g.DrawLine(new Pen(Brushes.Black, 2), 25, 15, 20, 10);
+            g.DrawLine(new Pen(Brushes.Black, 2), 15, 15, 20, 10);
+            g.DrawLine(new Pen(Brushes.Black, 2), 25, 15, 20, 10);
             pictureBox_Fuzzy_sets.BackgroundImage = My_bitmap;
         }
 
@@ -252,8 +252,8 @@ namespace ASCPR
                 return false;
             }
 
-            
-            
+
+
         }
 
         private void Create_file(Test TEST)
@@ -262,45 +262,44 @@ namespace ASCPR
             string fileName = "";
             fileName = TEST._Header.Name;
 
-            fileName = Additional_functions.Create_name_for_file(fileName);    
+            fileName = Additional_functions.Create_name_for_file(fileName);
             StreamWriter sr;
-            sr = new StreamWriter(fileName = Setting.tests_path + "\\" + fileName + ".txt", true, Encoding.UTF8);
-            sr.WriteLine(Descriptor_name._NAME + " <" + TEST._Header.Name + ">");
-            sr.WriteLine(Descriptor_name._DESCRIPTION + " <" + TEST._Header.Description + ">");
-            sr.WriteLine(Descriptor_name._VERIFIER + " <" + TEST._Header.Verifier + ">");
+            sr = new StreamWriter(fileName = $"{Setting.tests_path}\\{fileName}.txt", true, Encoding.UTF8);
+            sr.WriteLine($"{Descriptors._NAME} <{TEST._Header.Name }>");
+            sr.WriteLine($"{Descriptors._DESCRIPTION} <{TEST._Header.Description}>");
+            sr.WriteLine($"{Descriptors._VERIFIER} <{TEST._Header.Verifier}>");
             for (int i = 0; i < TEST._Questions.Count; i++)
             {
-                sr.WriteLine(Descriptor_name._QUESTION + " <" + TEST._Questions[i]._Question + ">");
+                sr.WriteLine($"{Descriptors._QUESTION} <{TEST._Questions[i]._Question}>");
                 for (int j = 0; j < TEST._Questions[i]._Answer.Count; j++)
-                    sr.WriteLine("  " + Descriptor_name._ANSWER + " <" + TEST._Questions[i]._Answer[j] + ">");
+                    sr.WriteLine($"  {Descriptors._ANSWER} <{TEST._Questions[i]._Answer[j]}>");
             }
             for (int i = 0; i < TEST._Keys.Count; i++)
             {
-                sr.WriteLine(Descriptor_name._KEY + " [" + i + "]" + "<");
+                sr.WriteLine($"{Descriptors._KEY} [{i}]<");
                 for (int j = 0; j < TEST._Keys[i].Count - 1; j++)
-                    sr.WriteLine("[" + TEST._Keys[i][j].Question + "]" + "(" + TEST._Keys[i][j].Answer + ")=" + TEST._Keys[i][j].Point + "+");
-                sr.WriteLine("[" + TEST._Keys[i][TEST._Keys[i].Count - 1].Question + "]" + "(" + TEST._Keys[i][TEST._Keys[i].Count - 1].Answer + ")=" + TEST._Keys[i][TEST._Keys[i].Count - 1].Point + ">");
+                    sr.WriteLine($"[{TEST._Keys[i][j].Question}]({TEST._Keys[i][j].Answer})={TEST._Keys[i][j].Point}+");
+                sr.WriteLine($"[{TEST._Keys[i][TEST._Keys[i].Count - 1].Question}]({TEST._Keys[i][TEST._Keys[i].Count - 1].Answer})={TEST._Keys[i][TEST._Keys[i].Count - 1].Point}>");
             }
             for (int i = 0; i < TEST._Scales.Count; i++)
             {
-                sr.WriteLine(Descriptor_name._SCALE + " [" + TEST._Scales[i].If_scale + "]" + "(" + TEST._Scales[i].Name_scale + ") ");
-                sr.WriteLine("<" + TEST._Scales[i].Manifestation + ">");
+                sr.WriteLine($"{Descriptors._SCALE} [{TEST._Scales[i].If_scale}]({TEST._Scales[i].Name_scale}) ");
+                sr.WriteLine($"<{TEST._Scales[i].Manifestation}>");
             }
             for (int i = 0; i < TEST._Fuzzy_sets.Count; i++)
             {
-                sr.WriteLine(Descriptor_name._FUZZY_SETS + " (" + TEST._Fuzzy_sets[i].Name + ") <");
+                sr.WriteLine(Descriptors._FUZZY_SETS + " (" + TEST._Fuzzy_sets[i].Name + ") <");
                 for (int j = 0; j < TEST._Fuzzy_sets[i].Functions.Count - 1; j++)
                 {
-                    sr.Write("[" + TEST._Fuzzy_sets[i].Functions[j].Left_side.A.X + ";" + TEST._Fuzzy_sets[i].Functions[j].Left_side.A.Y + "]");
-                    sr.Write("[" + TEST._Fuzzy_sets[i].Functions[j].Left_side.B.X + ";" + TEST._Fuzzy_sets[i].Functions[j].Left_side.B.Y + "]");
-                    sr.Write("[" + TEST._Fuzzy_sets[i].Functions[j].Right_side.A.X + ";" + TEST._Fuzzy_sets[i].Functions[j].Right_side.A.Y + "]");
-                    sr.WriteLine("[" + TEST._Fuzzy_sets[i].Functions[j].Right_side.B.X + ";" + TEST._Fuzzy_sets[i].Functions[j].Right_side.B.Y + "],");
+                    sr.Write($"[{TEST._Fuzzy_sets[i].Functions[j].Left_side.A.X};{TEST._Fuzzy_sets[i].Functions[j].Left_side.A.Y}]");
+                    sr.Write($"[{TEST._Fuzzy_sets[i].Functions[j].Left_side.B.X};{TEST._Fuzzy_sets[i].Functions[j].Left_side.B.Y}]");
+                    sr.Write($"[{TEST._Fuzzy_sets[i].Functions[j].Right_side.A.X};{TEST._Fuzzy_sets[i].Functions[j].Right_side.A.Y}]");
+                    sr.WriteLine($"[{TEST._Fuzzy_sets[i].Functions[j].Right_side.B.X};{TEST._Fuzzy_sets[i].Functions[j].Right_side.B.Y}],");
                 }
-
-                sr.Write("[" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.A.X + ";" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.A.Y + "]");
-                sr.Write("[" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.B.X + ";" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.B.Y + "]");
-                sr.Write("[" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.A.X + ";" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.A.Y + "]");
-                sr.WriteLine("[" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.B.X + ";" + TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.B.Y + "]>");
+                sr.Write($"[{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.A.X};{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.A.Y}]");
+                sr.Write($"[{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.B.X};{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Left_side.B.Y}]");
+                sr.Write($"[{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.A.X};{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.A.Y}]");
+                sr.WriteLine($"[{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.B.X};{TEST._Fuzzy_sets[i].Functions[TEST._Fuzzy_sets[i].Functions.Count - 1].Right_side.B.Y}]>");
             }
             sr.Close();
             MessageBox.Show("Файл добавлен");
@@ -378,7 +377,7 @@ namespace ASCPR
                 textBox_left_x2.RemoveAt(textBox_left_x2.Count - 1);
                 textBox_right_x1.RemoveAt(textBox_right_x1.Count - 1);
                 textBox_right_x2.RemoveAt(textBox_right_x2.Count - 1);
-                C_Function_label.Text = "Количество функций " + Convert.ToString(TEST._Fuzzy_sets[Fuzzy_sets_number].Functions.Count);
+                C_Function_label.Text = $"Количество функций {Convert.ToString(TEST._Fuzzy_sets[Fuzzy_sets_number].Functions.Count)}";
             }
 
             void button_left_click(object sender, EventArgs e)
@@ -404,7 +403,7 @@ namespace ASCPR
                             check = true;
                     if (!check)
                     {
-                        MessageBox.Show("Ошибка: шкала {0} не найдена!", textBox_fuzzy_set_name.Text.Trim());
+                        MessageBox.Show($"Ошибка: шкала {textBox_fuzzy_set_name.Text.Trim()} не найдена!");
                         return;
                     }
                     if (textBox_left_x1.Count == 0)
@@ -423,7 +422,7 @@ namespace ASCPR
                         float R_x2 = Convert.ToSingle(textBox_right_x2[i].Text);
                         if (L_x1 > L_x2 || L_x2 > R_x1 || R_x1 > R_x2)
                         {
-                            MessageBox.Show("Ошибка: В строке {0}, все элементы должны быть в порядке возрастения!", Convert.ToString(i));
+                            MessageBox.Show($"Ошибка: В строке {Convert.ToString(i)}, все элементы должны быть в порядке возрастения!");
                             return;
                         }
                         TEST._Fuzzy_sets[Fuzzy_sets_number].Functions[i].Left_side.A = new PointF(L_x1, 0);
@@ -500,7 +499,7 @@ namespace ASCPR
                     float R_x2 = Convert.ToSingle(textBox_right_x2[i].Text);
                     if (L_x1 > L_x2 || L_x2 > R_x1 || R_x1 > R_x2)
                     {
-                        MessageBox.Show("Ошибка: В строке {0}, все элементы должны быть в порядке возрастения!", Convert.ToString(i));
+                        MessageBox.Show($"Ошибка: В строке {Convert.ToString(i)}, все элементы должны быть в порядке возрастения!");
                         return;
                     }
 

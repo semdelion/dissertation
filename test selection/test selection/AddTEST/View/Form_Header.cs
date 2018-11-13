@@ -22,7 +22,6 @@ namespace ASCPR
             Design.Design_for_checkbox(NL_checkBox);
             Design.Design_for_checkbox(OO_checkBox);
             Design.Design_for_checkbox(AO_checkBox);
-
         }
 
         internal Form_header(Test TEST)
@@ -36,11 +35,11 @@ namespace ASCPR
             test_name_textbox.Text = TEST._Header.Name;
             description_textBox.Text = TEST._Header.Description;
 
-            if (TEST._Header.Verifier == Descriptor_name._NO_LIMITS)
+            if (TEST._Header.Verifier == VerificationDescriptors._NO_LIMITS)
                 NL_checkBox.Checked = true;
-            else if (TEST._Header.Verifier == Descriptor_name._AT_LEAST_ONE)
+            else if (TEST._Header.Verifier == VerificationDescriptors._AT_LEAST_ONE)
                 AO_checkBox.Checked = true;
-            else if (TEST._Header.Verifier == Descriptor_name._ONLY_ONE)
+            else if (TEST._Header.Verifier == VerificationDescriptors._ONLY_ONE)
                 OO_checkBox.Checked = true;
 
             void Button_create_Click(object sender, EventArgs e)
@@ -53,11 +52,11 @@ namespace ASCPR
                 else { MessageBox.Show("Ошибка: описание содержит символы \"<>\""); return; }
                
                 if (NL_checkBox.Checked)
-                    TEST._Header.Verifier = Descriptor_name._NO_LIMITS;
+                    TEST._Header.Verifier = VerificationDescriptors._NO_LIMITS;
                 else if (AO_checkBox.Checked)
-                    TEST._Header.Verifier = Descriptor_name._AT_LEAST_ONE;
+                    TEST._Header.Verifier = VerificationDescriptors._AT_LEAST_ONE;
                 else if (OO_checkBox.Checked)
-                    TEST._Header.Verifier = Descriptor_name._ONLY_ONE;
+                    TEST._Header.Verifier = VerificationDescriptors._ONLY_ONE;
                 else {
                     MessageBox.Show("Ошибка: вы не выбрали вариант валидации");
                     return;

@@ -8,9 +8,9 @@ namespace ASCPR
 {
     static class Level_of_expression
     {
-        static double not_expressed = 0.5;
-        static double weakly_expressed = 0.7;
-        static double reduced_expressed = 0.9;
+        const double not_expressed = 0.5;
+        const double weakly_expressed = 0.7;
+        const double reduced_expressed = 0.9;
 
         const string weakly_expressed_string = "Слабая степень выраженности таких черт, как";
         const string reduced_expressed_string = "Пониженная степень выраженности таких черт, как";

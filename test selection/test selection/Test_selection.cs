@@ -16,9 +16,9 @@ namespace ASCPR
         private List<string> NameTest = new List<string>();
 
         void Button_add_test_Click(object sender, EventArgs e){//добавление нового теста в список.
-            if ((sender as Button).BackgroundImage == Design.Background_button_true){
+            if ((sender as Button).BackgroundImage == Design.Background_button_true) {
                 (sender as Button).BackgroundImage = Design.Background_button;
-                string temp = (sender as Button).Text + ".txt";
+                string temp = $"{(sender as Button).Text}.txt";
                 for (int i = 0; i < NameTest.Count; i++)
                     if (temp == NameTest[i]){
                         NameTest.Remove(NameTest[i]);
@@ -27,7 +27,7 @@ namespace ASCPR
             }
             else{
                 (sender as Button).BackgroundImage =  Design.Background_button_true;
-                NameTest.Add((sender as Button).Text + ".txt");
+                NameTest.Add($"{(sender as Button).Text}.txt");
             }
         }
 
@@ -38,21 +38,21 @@ namespace ASCPR
                 MessageBox.Show("Ошибка: вы не выбрали тест");
                 return;
             }
-            string fileName = "", FIO,BD,TD;//Создаём имя файла, ФИО-ДР-ДАТА
-            FIO =  (textBox1.Text != "" ? textBox1.Text + " " : "") + (textBox2.Text != "" ? textBox2.Text + " " : "") + (textBox3.Text != "" ? textBox3.Text + " " : "");
-            BD  =  (textBox4.Text != "" ? textBox4.Text + "." : "") + (textBox5.Text != "" ? textBox5.Text + "." : "") + textBox6.Text;
+            string fileName = "", FIO, BD, TD;//Создаём имя файла, ФИО-ДР-ДАТА
+            FIO = $"{(textBox1.Text != "" ? textBox1.Text + " " : "")}{(textBox2.Text != "" ? textBox2.Text + " " : "")}{(textBox3.Text != "" ? textBox3.Text + " " : "")}";
+            BD = $"{(textBox4.Text != "" ? textBox4.Text + "." : "")}{(textBox5.Text != "" ? textBox5.Text + "." : "")} {textBox6.Text}";
             TD = (DateTime.Today.ToString("d")).Replace('/', '.');
-            fileName =  (FIO != "" ? FIO + " " : "") + (BD != "" ? BD + " " : "") + TD;
+            fileName = $"{(FIO != "" ? FIO + " " : "")}{(BD != "" ? BD + " " : "")}{TD}";
             fileName = Additional_functions.Create_name_for_file(fileName);
             StreamWriter sr;
-            sr = new StreamWriter(fileName = Setting.database_path + "\\" + fileName + ".txt");
-            sr.WriteLine(Descriptor_name._HEADER + " <");
-            sr.WriteLine("Имя: " + FIO);
-            sr.WriteLine("Дата рождения: " + BD);
-            sr.WriteLine("Дата тестирования: " + TD);
-            sr.WriteLine("Тесты: ");
+            sr = new StreamWriter(fileName = $"{Setting.database_path}\\{fileName}.txt");
+            sr.WriteLine($"{Descriptors._HEADER} <");
+            sr.WriteLine($"Имя: {FIO}");
+            sr.WriteLine($"Дата рождения: {BD}");
+            sr.WriteLine($"Дата тестирования: {TD}");
+            sr.WriteLine($"Тесты: ");
             for (int i = 0; i < NameTest.Count; i++)
-                sr.WriteLine(i+1 + ") " + NameTest[i]);
+                sr.WriteLine($"{i+1}) {NameTest[i]}");
             sr.WriteLine(">");
             Form2 FormCreate = new Form2(NameTest, fileName);
             sr.Close();

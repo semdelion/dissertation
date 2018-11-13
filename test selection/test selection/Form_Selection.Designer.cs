@@ -43,7 +43,7 @@
             this.listBox_tests.Location = new System.Drawing.Point(12, 17);
             this.listBox_tests.Name = "listBox_tests";
             this.listBox_tests.ScrollAlwaysVisible = true;
-            this.listBox_tests.Size = new System.Drawing.Size(360, 232);
+            this.listBox_tests.Size = new System.Drawing.Size(944, 574);
             this.listBox_tests.TabIndex = 0;
             this.listBox_tests.SelectedIndexChanged += new System.EventHandler(this.ListBox_tests_SelectedIndexChanged);
             // 
@@ -52,7 +52,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(384, 261);
+            this.ClientSize = new System.Drawing.Size(968, 611);
             this.Controls.Add(this.listBox_tests);
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "Form3";

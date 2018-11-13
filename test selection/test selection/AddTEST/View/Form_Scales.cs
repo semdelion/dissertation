@@ -74,7 +74,7 @@ namespace ASCPR
 
         private void Create_Scale(Test TEST)
         {
-            Scale_label.Text = Convert.ToString(Scale_number + 1) + " / " + Convert.ToString(TEST._Scales.Count);
+            Scale_label.Text = $"{Convert.ToString(Scale_number + 1)} / {Convert.ToString(TEST._Scales.Count)}";
 
             Design.Design_for_textbox(name_Scale_textBox);
             Design.Design_for_textbox(description_textBox);

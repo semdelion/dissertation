@@ -35,7 +35,7 @@ namespace ASCPR
 
         public bool Creat_test(string FileName) // создание теста
         {
-            using (StreamReader sr = new StreamReader(Setting.tests_path + "\\" + FileName, Encoding.GetEncoding(1251)))
+            using (StreamReader sr = new StreamReader($"{Setting.tests_path}\\{FileName}", Encoding.GetEncoding(1251)))
             {
                 string line = sr.ReadToEnd();
                 string keyword;
@@ -46,45 +46,45 @@ namespace ASCPR
                         keyword = "";
                         for (; i < line.Length && line[i] != ' '; i++)
                             keyword += line[i];
-
-                        switch (keyword) // заполнение класса Test
+                        Enum.TryParse(keyword, out Descriptors Descriptor);
+                        switch (Descriptor) // заполнение класса Test
                         {
-                            case Descriptor_name._ANSWER:
+                            case Descriptors._ANSWER:
                                 {
                                     Descriptors_implementation._ANSWER(_Questions, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._QUESTION:
+                            case Descriptors._QUESTION:
                                 {
                                     Descriptors_implementation._QUESTION(_Questions, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._SCALE:
+                            case Descriptors._SCALE:
                                 {
                                     Descriptors_implementation._SCALE(_Scales, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._KEY:
+                            case Descriptors._KEY:
                                 {
                                     Descriptors_implementation._KEY(_Keys, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._FUZZY_SETS:
+                            case Descriptors._FUZZY_SETS:
                                 {
                                     Descriptors_implementation._FUZZY_SETS(_Fuzzy_sets, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._NAME:
+                            case Descriptors._NAME:
                                 {
                                     Descriptors_implementation._NAME(_Header, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._DESCRIPTION:
+                            case Descriptors._DESCRIPTION:
                                 {
                                     Descriptors_implementation._DESCRIPTION(_Header, ref i, ref line);
                                         break;
                                 }
-                            case Descriptor_name._VERIFIER:
+                            case Descriptors._VERIFIER:
                                 {
                                     Descriptors_implementation._VERIFIER(_Header, ref i, ref line);
                                         break;

@@ -25,7 +25,7 @@ namespace ASCPR
                 {
                     sum = sum / Personal_characteristics.Groups[i].Links.Count;
                     if (Level_of_expression.Return_text_about_of_expression(sum, out Manifestation))
-                        Manifestation = Personal_characteristics.Name + " - Группа " +(i+1)+ "\r\n" + Manifestation + "\r\n" + Personal_characteristics.Groups[i].Manifestation + "\r\n";
+                        Manifestation = $"{Personal_characteristics.Name} - Группа {(i+1)}\r\n{Manifestation}\r\n{Personal_characteristics.Groups[i].Manifestation}\r\n";
                 }
                 Characteristics += Manifestation;
             }
@@ -40,16 +40,13 @@ namespace ASCPR
                 string Manifestation = "";
                 for (int j = 0; j < Personal_characteristics.Groups[i].Links.Count; j++)
                 {
-                    Manifestation += "Группа " + (i + 1) + " " + Personal_characteristics.Name +
-                       " - мера принадлежности " + Convert.ToString(Personal_characteristics.Groups[i].Links[j].Measure_of_expression) + "; \r\n";
+                    Manifestation += $"Группа {(i + 1)} {Personal_characteristics.Name} - мера принадлежности " +
+                        $"{Convert.ToString(Personal_characteristics.Groups[i].Links[j].Measure_of_expression)}; \r\n";
                     for (int k = 0; k < Personal_characteristics.Groups[i].Links[j].Test_name.Count; k++)
-                    {
-                        Manifestation += Personal_characteristics.Groups[i].Links[j].Test_name[k] + " --- "
-                            + Personal_characteristics.Groups[i].Links[j].Scale_name[k] + "; \r\n";
-                    }
-                    Manifestation += Personal_characteristics.Groups[i].Manifestation + "\r\n\r\n";
+                        Manifestation += $"{Personal_characteristics.Groups[i].Links[j].Test_name[k]} --- {Personal_characteristics.Groups[i].Links[j].Scale_name[k]}; \r\n";
+                    Manifestation += $"{Personal_characteristics.Groups[i].Manifestation} \r\n\r\n";
                 }
-                Characteristics += Manifestation +"\n\r";
+                Characteristics += $"{Manifestation} \n\r";
             }
             return Characteristics;
         }
@@ -58,57 +55,54 @@ namespace ASCPR
         {
             StreamWriter sw = File.AppendText(FileName);
 
-            sw.WriteLine("\r\n" + Descriptor_name._TEST_RESULT + " <"); 
+            sw.WriteLine($"\r\n{Descriptors._TEST_RESULT} <"); 
             for (int i = 0; i < TESTS.Count; i++)
             {
                 sw.WriteLine(TESTS[i]._Header.Name);
                 for (int j = 0; j < Manifestations_all[i].Count; j++)
                     sw.WriteLine(Manifestations_all[i][j]);
             }
-            sw.WriteLine(" >" + "\r\n");
+            sw.WriteLine(" >\r\n");
 
-            sw.WriteLine("\r\n" + Descriptor_name._AUTOMATIC_RESUME +" <");
+            sw.WriteLine($"\r\n{Descriptors._AUTOMATIC_RESUME} <");
             for (int i = 0; i < Personal_characteristics.Count; i++)
             {
-                string tmp;
-                tmp = Save_Groups(Personal_characteristics[i]);
+                string tmp = Save_Groups(Personal_characteristics[i]);
                 if (tmp != "")
                    sw.WriteLine(tmp);
             }
-            sw.WriteLine(" >" + "\r\n");
+            sw.WriteLine(" >\r\n");
 
-            sw.WriteLine("\r\n" + Descriptor_name._LEVELS_OF_EXPRESSION + " <");
+            sw.WriteLine($"\r\n{Descriptors._LEVELS_OF_EXPRESSION} <");
             for (int i = 0; i < Personal_characteristics.Count; i++)
             {
-                string tmp;
-                tmp = Save_All_Groups(Personal_characteristics[i]);
+                string tmp = Save_All_Groups(Personal_characteristics[i]);
                 if (tmp != "")
                     sw.WriteLine(tmp);
             }
-            sw.WriteLine(" >" + "\r\n");
+            sw.WriteLine(" >\r\n");
 
-            sw.WriteLine("\r\n" + Descriptor_name._TEST_SCALES + " <");
+            sw.WriteLine($"\r\n{Descriptors._TEST_SCALES} <");
             for (int i = 0; i < Dictionary_of_scales.Count; i++)
             {
                 sw.WriteLine(TESTS[i]._Header.Name);
                 foreach (var j in Dictionary_of_scales[i])
                     sw.WriteLine("(" + j.Key + " ) " + "Баллов - " + j.Value);
             }
-            sw.WriteLine(" >" + "\r\n");
+            sw.WriteLine(" >\r\n");
 
-            sw.WriteLine("\r\n" + Descriptor_name._ANSWERS_TO_TESTS + " <");
+            sw.WriteLine($"\r\n{Descriptors._ANSWERS_TO_TESTS} <");
             for (int i = 0; i < TESTS.Count; i++)
             {
                 sw.WriteLine(TESTS[i]._Header.Name);
                 for (int j = 0; j < Answers_to_all_tests[i].Count; j++)
                 {
-                    sw.WriteLine((j + 1) + ") " + TESTS[i]._Questions[j]._Question);
+                    sw.WriteLine($"{(j + 1)}) {TESTS[i]._Questions[j]._Question}");
                     for (int k = 0; k < Answers_to_all_tests[i][j].Count; k++)
-                        sw.WriteLine("     " + (Answers_to_all_tests[i][j][k] + 1) + ") " + TESTS[i]._Questions[j]._Answer[Answers_to_all_tests[i][j][k]]);
+                        sw.WriteLine($"    {(Answers_to_all_tests[i][j][k] + 1)}) {TESTS[i]._Questions[j]._Answer[Answers_to_all_tests[i][j][k]]}");
                 }
             }
-            sw.WriteLine(" >" + "\r\n");
-
+            sw.WriteLine(" >\r\n");
             sw.Close();
         }
 

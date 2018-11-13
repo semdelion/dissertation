@@ -44,7 +44,7 @@ namespace ASCPR
             {
                 string name = listBox_tests.SelectedItem.ToString();
                 Test TEST = new Test();
-                TEST.Creat_test(name + ".txt");
+                TEST.Creat_test($"{name}.txt");
                 Form_header AddForm = new Form_header(TEST);
                 this.Close();
             }

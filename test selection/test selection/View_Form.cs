@@ -38,35 +38,35 @@ namespace ASCPR
                         keyword = "";
                         for (; i < line.Length && line[i] != ' '; i++)
                             keyword += line[i];
-
-                        switch (keyword) // заполнение класса Test
+                        Enum.TryParse(keyword, out Descriptors Descriptor);
+                        switch (Descriptor) // заполнение класса Test
                         {
-                            case Descriptor_name._HEADER:
+                            case Descriptors._HEADER:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _HEADER);
                                     break;
                                 }
-                            case Descriptor_name._TEST_RESULT:
+                            case Descriptors._TEST_RESULT:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _TEST_RESULT);
                                     break;
                                 }
-                            case Descriptor_name._AUTOMATIC_RESUME:
+                            case Descriptors._AUTOMATIC_RESUME:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _AUTOMATIC_RESUME);
                                     break;
                                 }
-                            case Descriptor_name._LEVELS_OF_EXPRESSION:
+                            case Descriptors._LEVELS_OF_EXPRESSION:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _LEVELS_OF_EXPRESSION);
                                     break;
                                 }
-                            case Descriptor_name._ANSWERS_TO_TESTS:
+                            case Descriptors._ANSWERS_TO_TESTS:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _ANSWERS_TO_TESTS);
                                     break;
                                 }
-                            case Descriptor_name._TEST_SCALES:
+                            case Descriptors._TEST_SCALES:
                                 {
                                     Descriptors_implementation._GET_RESULT(ref i, line, out _TEST_SCALES);
                                     break;
@@ -157,55 +157,37 @@ namespace ASCPR
 
         private void CheckBox_Header_Click(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _HEADER_flag = false;
-            else
-                _HEADER_flag = true;
+            _HEADER_flag = (sender as CheckBox).Checked == false ? false : true;
             Add_Text_on_form();
         }
 
         private void CheckBox_Result_tests_Click(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _TEST_RESULT_flag = false;
-            else
-                _TEST_RESULT_flag = true;
+            _TEST_RESULT_flag = (sender as CheckBox).Checked == false ? false : true;
             Add_Text_on_form();
         }
 
         private void CheckBox_Auto_Resume_Click(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _AUTOMATIC_RESUME_flag = false;
-            else
-                _AUTOMATIC_RESUME_flag = true;
+            _AUTOMATIC_RESUME_flag = (sender as CheckBox).Checked == false ? false : true;
             Add_Text_on_form();
         }
 
         private void CheckBox_Expression_Click(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _LEVELS_OF_EXPRESSION_flag = false;
-            else
-                _LEVELS_OF_EXPRESSION_flag = true;
+            _LEVELS_OF_EXPRESSION_flag = (sender as CheckBox).Checked == false ?  false :  true;
             Add_Text_on_form();
         }
         
         private void CheckBox_Scales_Click(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _TEST_SCALES_flag = false;
-            else
-                _TEST_SCALES_flag = true;
+            _TEST_SCALES_flag = (sender as CheckBox).Checked == false ? false : true;
             Add_Text_on_form();
         }
 
         private void CheckBox_Answers_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked == false)
-                _ANSWERS_TO_TESTS_flag = false;
-            else
-                _ANSWERS_TO_TESTS_flag = true;
+            _ANSWERS_TO_TESTS_flag = (sender as CheckBox).Checked == false ? false : true;
             Add_Text_on_form();
         }
     }

@@ -39,7 +39,7 @@ namespace ASCPR
                 BackColor = System.Drawing.Color.Transparent,
                 ForeColor = Design.Font_color,
                 Font = Design.Font_heading,
-                Text = Convert.ToString(ind + 1) + ") " + Q._Question,
+                Text = $"{Convert.ToString(ind + 1)}) {Q._Question}",
                 AutoSize = true,
                 MaximumSize = new Size(this.Width - 60, this.Height - 60)
             };
@@ -115,9 +115,9 @@ namespace ASCPR
             Test TEST = new Test();
             if (!TEST.Creat_test(Tests[Test_number]))
             {
-                MessageBox.Show("Ошибка: Файл - \"" + Tests[Test_number] + "\" содержит ошибку.");
+                MessageBox.Show($"Ошибка: Файл - \"{Tests[Test_number]}\" содержит ошибку.");
                 this.Close();
-                throw new Exception("Ошибка: Файл - \"" + Tests[Test_number] + "\" содержит ошибку.");
+                throw new Exception($"Ошибка: Файл - \"{Tests[Test_number]}\" содержит ошибку.");
             }
             TESTS.Add(TEST);// add test in list
             this.Text = TEST._Header.Name;
@@ -148,26 +148,26 @@ namespace ASCPR
                 Answers_to_Test answers_to_the_Test = new Answers_to_Test();
                 Create_Answer_list(LIST_OF_LABELS_TEST_QUESTIONS, answers_to_the_Test);//формируем список вопросов и ответов на эти вопросы. 
 
-                if (TEST._Header.Verifier == Descriptor_name._ONLY_ONE)
+                if (TEST._Header.Verifier == VerificationDescriptors._ONLY_ONE)
                     for (int i = 0; i < answers_to_the_Test.Count; i++)
                         if (answers_to_the_Test[i].Count != 1)
                         {
                             string Err = "Ошибка: на вопрос: ";
                             for (; i < answers_to_the_Test.Count; i++)       
                                 if (answers_to_the_Test[i].Count != 1)
-                                    Err += " " + Convert.ToString(i + 1);
-                            MessageBox.Show(Err + " должен быть один.");
+                                    Err += $" {Convert.ToString(i + 1)}";
+                            MessageBox.Show($"{Err} должен быть один.");
                             return;
                         }
 
-                if (TEST._Header.Verifier == Descriptor_name._AT_LEAST_ONE)
+                if (TEST._Header.Verifier == VerificationDescriptors._AT_LEAST_ONE)
                     for (int i = 0; i < answers_to_the_Test.Count; i++)
                         if (answers_to_the_Test[i].Count == 0)
                         {
                             string Err = "Ошибка: вы не ответили на вопрос: ";
                             for (; i < answers_to_the_Test.Count; i++)
                                 if (answers_to_the_Test[i].Count == 0)
-                                    Err += " " + Convert.ToString(i + 1);
+                                    Err += $" {Convert.ToString(i + 1)}";
                             MessageBox.Show(Err);
                             return;
                         }

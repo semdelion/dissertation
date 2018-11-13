@@ -20,14 +20,13 @@ namespace ASCPR
             Design.Design_for_button(button_new_test);
             Design.Design_for_button(button_Test_change);
             BackgroundImage = Design.Background;
-            Button_update_Click(null, null); // добавляем всё на форму
+            Button_update_Click(null, null);
         }
         private void ListBox_test_results_SelectedIndexChanged(object sender, System.EventArgs e) // open result in new window
         {
             if (listBox_test_results.SelectedIndex >= 0)
-            { 
-                string curItem = listBox_test_results.SelectedItem.ToString();
-                View_Form View_text = new View_Form(Setting.database_path + "\\" + curItem + ".txt");
+            {
+                View_Form View_text = new View_Form($"{Setting.database_path}\\{listBox_test_results.SelectedItem.ToString()}.txt");
             }
         }
 
@@ -48,7 +47,6 @@ namespace ASCPR
             catch
             {
                 MessageBox.Show("Ошибка: БД результатов не найдена");
-                return;
             }
         }
 

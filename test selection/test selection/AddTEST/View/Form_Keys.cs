@@ -105,7 +105,7 @@ namespace ASCPR
         private void Create_row(Test TEST, int index=0)
         {
             this.SuspendLayout();
-            C_Row_label.Text = "Количество строк " + Convert.ToString(TEST._Keys[Key_number].Count);
+            C_Row_label.Text = $"Количество строк {Convert.ToString(TEST._Keys[Key_number].Count)}";
 
             int height;
             if (index == 0)
@@ -150,7 +150,7 @@ namespace ASCPR
 
         private void Create_Key(Test TEST)
         {
-            Key_label.Text = Convert.ToString(Key_number + 1) + " / " + Convert.ToString(TEST._Keys.Count);
+            Key_label.Text = $"{Convert.ToString(Key_number + 1)} / {Convert.ToString(TEST._Keys.Count)}";
             Clear_panel();
 
             Questions_form = new List<TextBox>();
@@ -206,7 +206,7 @@ namespace ASCPR
                 Answers_form.RemoveAt(Answers_form.Count - 1);
                 Points_form.RemoveAt(Points_form.Count - 1);
 
-                C_Row_label.Text = "Количество строк " + Convert.ToString(TEST._Keys[Key_number].Count);
+                C_Row_label.Text = $"Количество строк {Convert.ToString(TEST._Keys[Key_number].Count)}";
             }
 
             void button_create_click(object sender, EventArgs e)

@@ -74,7 +74,7 @@ namespace ASCPR
 
         private void Create_answer(Test TEST, int index = 0)
         {
-            CA_label.Text = "Количество ответов " + Convert.ToString(TEST._Questions[Question_number]._Answer.Count);
+            CA_label.Text = $"Количество ответов {Convert.ToString(TEST._Questions[Question_number]._Answer.Count)}";
             int height;
 
             if (index==0)
@@ -103,7 +103,7 @@ namespace ASCPR
         private void Create_questions(Test TEST)
         {
             this.SuspendLayout();
-            Q_label.Text = Convert.ToString(Question_number + 1) + " / " + Convert.ToString(TEST._Questions.Count);
+            Q_label.Text = $"{Convert.ToString(Question_number + 1)} / {Convert.ToString(TEST._Questions.Count)}";
             question_textBox.Text = TEST._Questions[Question_number]._Question;
             Clear_panel();
             Answer_form = new List<TextBox>();
@@ -187,7 +187,7 @@ namespace ASCPR
                 Delete_last_answer_on_panel();
                 TEST._Questions[Question_number]._Answer.RemoveAt(TEST._Questions[Question_number]._Answer.Count-1);
                 Answer_form.RemoveAt(Answer_form.Count-1);
-                CA_label.Text = "Количество ответов " + Convert.ToString(TEST._Questions[Question_number]._Answer.Count);
+                CA_label.Text = $"Количество ответов {Convert.ToString(TEST._Questions[Question_number]._Answer.Count)}";
             }
 
             void button_left_click(object sender, EventArgs e)

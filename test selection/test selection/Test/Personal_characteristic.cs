@@ -87,15 +87,15 @@ namespace ASCPR
                         keyword = "";
                         for (; i < line.Length && line[i] != ' '; i++)
                             keyword += line[i];
-
-                        switch (keyword) // заполнение класса 
+                        Enum.TryParse(keyword, out Descriptors Descriptor);
+                        switch (Descriptor) // заполнение класса 
                         {
-                            case Descriptor_name._GROUP:
+                            case Descriptors._GROUP:
                                 {
                                     Descriptors_implementation._GROUP(Groups, ref i, ref line);
                                     break;
                                 }
-                            case Descriptor_name._LINK:
+                            case Descriptors._LINK:
                                 {
                                     Descriptors_implementation._LINK(Groups, ref i, ref line);
                                     break;
@@ -183,13 +183,10 @@ namespace ASCPR
             string Text = Name;
             for (int i = 0; i < Groups.Count; i++)
             {
-                Text += "\n\r" + (i+1) +") "+ Groups[i].Manifestation;
+                Text +=  $"\n\r {(i+1)}) {Groups[i].Manifestation}";
                 for (int j = 0; j < Groups[i].Links.Count; j++)
-                {
-                    Text += "\n\r" +"             " + (j+1) + ") " + 
-                    Groups[i].Links[j].Test_name[0] + "   " + Groups[i].Links[j].Scale_name[0] + 
-                    "   " + Groups[i].Links[j].Function_number[0] + "   " + Groups[i].Links[j].Measure_of_expression;
-                }
+                    Text += $"\n\r           {(j + 1)}) {Groups[i].Links[j].Test_name[0]}  {Groups[i].Links[j].Scale_name[0]}" +
+                        $"   {Groups[i].Links[j].Function_number[0]}    {Groups[i].Links[j].Measure_of_expression}";
             }
             MessageBox.Show(Text);
         }

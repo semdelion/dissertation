@@ -46,40 +46,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Additional_functions.cs" />
-    <Compile Include="Descriptors.cs" />
+    <Compile Include="Test\Descriptors.cs" />
     <Compile Include="Design.cs" />
-    <Compile Include="Form_Keys.cs">
+    <Compile Include="AddTEST\View\Form_Keys.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Keys.Designer.cs">
+    <Compile Include="AddTEST\View\Form_Keys.Designer.cs">
       <DependentUpon>Form_Keys.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Header.cs">
+    <Compile Include="AddTEST\View\Form_Header.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Header.Designer.cs">
+    <Compile Include="AddTEST\View\Form_Header.Designer.cs">
       <DependentUpon>Form_Header.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Questions.cs">
+    <Compile Include="AddTEST\View\Form_Questions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Questions.Designer.cs">
+    <Compile Include="AddTEST\View\Form_Questions.Designer.cs">
       <DependentUpon>Form_Questions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Scales.cs">
+    <Compile Include="AddTEST\View\Form_Scales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Scales.Designer.cs">
+    <Compile Include="AddTEST\View\Form_Scales.Designer.cs">
       <DependentUpon>Form_Scales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Fuzzy_Sets.cs">
+    <Compile Include="AddTEST\View\Form_Fuzzy_Sets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Fuzzy_Sets.Designer.cs">
+    <Compile Include="AddTEST\View\Form_Fuzzy_Sets.Designer.cs">
       <DependentUpon>Form_Fuzzy_Sets.cs</DependentUpon>
     </Compile>
-    <Compile Include="Level_of_expression.cs" />
-    <Compile Include="Personal_characteristic.cs" />
+    <Compile Include="Testing\Level_of_expression.cs" />
+    <Compile Include="Test\Personal_characteristic.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -92,10 +92,10 @@
     <Compile Include="Test_selection.Designer.cs">
       <DependentUpon>Test_selection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Testing.cs">
+    <Compile Include="Testing\Testing.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Testing.Designer.cs">
+    <Compile Include="Testing\Testing.Designer.cs">
       <DependentUpon>Testing.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Selection.cs">
@@ -110,37 +110,37 @@
     <Compile Include="Main_Window.Designer.cs">
       <DependentUpon>Main_Window.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test components.cs" />
+    <Compile Include="Test\Test components.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />
-    <Compile Include="Test.cs" />
-    <Compile Include="Test_parser.cs" />
+    <Compile Include="Test\Test.cs" />
+    <Compile Include="Testing\Test_parser.cs" />
     <Compile Include="View_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View_Form.Designer.cs">
       <DependentUpon>View_Form.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form_Keys.resx">
+    <EmbeddedResource Include="AddTEST\View\Form_Keys.resx">
       <DependentUpon>Form_Keys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Header.resx">
+    <EmbeddedResource Include="AddTEST\View\Form_Header.resx">
       <DependentUpon>Form_Header.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Questions.resx">
+    <EmbeddedResource Include="AddTEST\View\Form_Questions.resx">
       <DependentUpon>Form_Questions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Scales.resx">
+    <EmbeddedResource Include="AddTEST\View\Form_Scales.resx">
       <DependentUpon>Form_Scales.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Fuzzy_Sets.resx">
+    <EmbeddedResource Include="AddTEST\View\Form_Fuzzy_Sets.resx">
       <DependentUpon>Form_Fuzzy_Sets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test_selection.resx">
       <DependentUpon>Test_selection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Testing.resx">
+    <EmbeddedResource Include="Testing\Testing.resx">
       <DependentUpon>Testing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Selection.resx">

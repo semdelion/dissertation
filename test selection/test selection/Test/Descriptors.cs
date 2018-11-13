@@ -6,55 +6,48 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace ASCPR
 {
-    public static class Descriptor_name
+    enum Descriptors
     {
-        public const string _NAME = "_NAME";
-        public const string _DESCRIPTION = "_DESCRIPTION";
-        public const string _QUESTION = "_QUESTION";
-        public const string _ANSWER = "_ANSWER";
-
-        public const string _KEY = "_KEY";
-        public const string _SCALE = "_SCALE";
-
-        public const string _FUZZY_SETS = "_FUZZY_SETS";
-
-        public const string _HEADER = "_HEADER";
-        public const string _TEST_RESULT = "_TEST_RESULT";
-        public const string _AUTOMATIC_RESUME = "_AUTOMATIC_RESUME";
-        
-        public const string _ANSWERS_TO_TESTS = "_ANSWERS_TO_TESTS";
-        public const string _TEST_SCALES = "_TEST_SCALES";
-        public const string _LEVELS_OF_EXPRESSION = "_LEVELS_OF_EXPRESSION";
-
-        public const string _VERIFIER = "_VERIFIER";
-        public const string _AT_LEAST_ONE = "_AT_LEAST_ONE";
-        public const string _ONLY_ONE = "_ONLY_ONE";
-        public const string _NO_LIMITS = "_NO_LIMITS";
-
-        public const string _GROUP = "_GROUP";
-        public const string _LINK = "_LINK";
+        _NAME = 1,
+        _DESCRIPTION,
+        _QUESTION,
+        _ANSWER,
+        _KEY,
+        _SCALE,
+        _FUZZY_SETS,
+        _HEADER,
+        _TEST_RESULT,
+        _AUTOMATIC_RESUME,
+        _ANSWERS_TO_TESTS,
+        _TEST_SCALES,
+        _LEVELS_OF_EXPRESSION,
+        _VERIFIER,
+        _GROUP,
+        _LINK
+    }
+    enum VerificationDescriptors
+    {
+        _AT_LEAST_ONE = 1,
+        _ONLY_ONE,
+        _NO_LIMITS
     }
 
     static class Descriptors_implementation
     {
-        public static void _NAME(Header _Header, ref int i, ref string line)
-        {
-            _Header.Name = Additional_functions.ClearLine(ref i, line);
-        }
+        public static void _NAME(Header _Header, ref int i, ref string line) => _Header.Name = Additional_functions.ClearLine(ref i, line);
+        
 
-        public static void _DESCRIPTION(Header _Header, ref int i, ref string line)
-        {
-            _Header.Description = Additional_functions.ClearLine(ref i, line);
-        }
+        public static void _DESCRIPTION(Header _Header, ref int i, ref string line) => _Header.Description = Additional_functions.ClearLine(ref i, line);
+        
 
         public static void _VERIFIER(Header _Header, ref int i, ref string line)
         {
-            string tmp_nt = Additional_functions.ClearLine(ref i, line);
-            switch (tmp_nt)
+            Enum.TryParse(Additional_functions.ClearLine(ref i, line), out VerificationDescriptors Descriptor);
+            switch (Descriptor)
             {
-                case Descriptor_name._ONLY_ONE: { _Header.Verifier = Descriptor_name._ONLY_ONE; break; }
-                case Descriptor_name._AT_LEAST_ONE: { _Header.Verifier = Descriptor_name._AT_LEAST_ONE; break; }
-                case Descriptor_name._NO_LIMITS: { _Header.Verifier = Descriptor_name._NO_LIMITS; break; }
+                case VerificationDescriptors._ONLY_ONE: { _Header.Verifier = VerificationDescriptors._ONLY_ONE; break; }
+                case VerificationDescriptors._AT_LEAST_ONE: { _Header.Verifier = VerificationDescriptors._AT_LEAST_ONE; break; }
+                case VerificationDescriptors._NO_LIMITS: { _Header.Verifier = VerificationDescriptors._NO_LIMITS; break; }
             }
         }
 
@@ -79,7 +72,6 @@ namespace ASCPR
                 foreach (var row in rows){
                     int k = 0;
                     key.Add(new Element(
-                    
                         Convert.ToInt32(Additional_functions.Trim(row, ref k, '[', ']')),
                         Convert.ToInt32(Additional_functions.Trim(row, ref k, '(', ')')),
                         Convert.ToSingle(Additional_functions.Trim(row, ref k, '=', '*').Replace('.', ','))

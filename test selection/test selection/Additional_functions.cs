@@ -16,8 +16,7 @@ namespace ASCPR
         public static object Verification_of_conditions(string begin, string program, string end)
         {
             CSharpCodeProvider provider = new CSharpCodeProvider();
-            CompilerParameters parameters = new CompilerParameters();
-            parameters.GenerateInMemory = true;
+            CompilerParameters parameters = new CompilerParameters{ GenerateInMemory = true };
             parameters.ReferencedAssemblies.Add("System.dll");
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, begin + program + end);
             var cls = results.CompiledAssembly.GetType("MyNamespace.LambdaCreator");
@@ -41,10 +40,10 @@ namespace ASCPR
         public static string Trim(string str, ref int i, char l, char r)
         {
             for (; i < str.Length && str[i] != l; i++) ;
-            string t = "";
+            string tmp = "";
             for (i++; i < str.Length && str[i] != r; i++)
-                t += str[i];
-            return t;
+                tmp += str[i];
+            return tmp;
         }
 
         public static Line ToLine(string point_a, string point_b)
@@ -122,10 +121,8 @@ namespace ASCPR
         public static int Number_of_Contains(List<Test> Tests, string name_test)
         {
             for (int i = 0; i < Tests.Count; i++)
-            {
                 if (Tests[i]._Header.Name == name_test)
                     return i;
-            }
             return -1;
         }
 
@@ -141,9 +138,9 @@ namespace ASCPR
         {
             string next_number = "";
             int i = 0;
-            while (System.IO.File.Exists(Setting.database_path + "\\" + (next_number == "" ? "" : next_number + " ") + name_file + ".txt"))
+            while (System.IO.File.Exists($"{Setting.database_path}\\{(next_number == "" ? "" : $"{next_number} ")}{name_file}.txt"))
                 next_number = Convert.ToString(++i);
-            return (next_number == "" ? "": next_number + " ") + name_file;
+            return $"{(next_number == "" ? "": $"{next_number} ")}{name_file}";
         }
     }
 }
